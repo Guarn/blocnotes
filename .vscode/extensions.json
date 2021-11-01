@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "coenraads.bracket-pair-colorizer",
+    "graphql.vscode-graphql",
+    "jpoissonnier.vscode-styled-components",
+    "exodiusstudios.comment-anchors",
+    "paulmolluzzo.convert-css-in-js",
+    "dbaeumer.vscode-eslint",
+    "yzhang.markdown-all-in-one",
+    "shd101wyy.markdown-preview-enhanced",
+    "esbenp.prettier-vscode"
+  ]
+}

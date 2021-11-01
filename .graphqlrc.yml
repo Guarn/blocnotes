@@ -1,0 +1,10 @@
+projects:
+  project:
+    schema: "schema.graphql"
+    documents: src/**/*.{graphql,tsx,jsx,ts,js}
+    extensions:
+      languageService:
+        useSchemaFileDefinitions: true
+      endpoints:
+        default:
+          url: "http://localhost:8080/v1/graphql"

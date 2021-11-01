@@ -1,0 +1,14 @@
+query GetUsersWithNotes {
+  utilisateur {
+    pseudonyme
+    notes_utilisateurs {
+      note {
+        notes_utilisateurs {
+          utilisateur {
+            pseudonyme
+          }
+        }
+      }
+    }
+  }
+}

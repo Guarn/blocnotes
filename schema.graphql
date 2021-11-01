@@ -1,0 +1,1469 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """measured in seconds"""
+  ttl: Int! = 60
+
+  """refresh the cache entry"""
+  refresh: Boolean! = false
+) on QUERY
+
+"""
+Direct the client to resolve this field locally, either from the cache or local resolvers.
+"""
+directive @client(
+  """
+  When true, the client will never use the cache for this value. See
+  https://www.apollographql.com/docs/react/essentials/local-state/#forcing-resolvers-with-clientalways-true
+  """
+  always: Boolean
+) on FIELD | FRAGMENT_DEFINITION | INLINE_FRAGMENT
+
+"""
+Export this locally resolved field as a variable to be used in the remainder of this query. See
+https://www.apollographql.com/docs/react/essentials/local-state/#using-client-fields-as-variables
+"""
+directive @export(
+  """The variable name to export this field as."""
+  as: String!
+) on FIELD
+
+"""
+Specify a custom store key for this result. See
+https://www.apollographql.com/docs/react/advanced/caching/#the-connection-directive
+"""
+directive @connection(
+  """Specify the store key."""
+  key: String!
+
+  """
+  An array of query argument names to include in the generated custom store key.
+  """
+  filter: [String!]
+) on FIELD
+
+"""
+Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+"""
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _is_null: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete data from the table: "notes"
+  """
+  delete_notes(
+    """filter the rows which have to be deleted"""
+    where: notes_bool_exp!
+  ): notes_mutation_response
+
+  """
+  delete single row from the table: "notes"
+  """
+  delete_notes_by_pk(id: Int!): notes
+
+  """
+  delete data from the table: "notes_utilisateurs"
+  """
+  delete_notes_utilisateurs(
+    """filter the rows which have to be deleted"""
+    where: notes_utilisateurs_bool_exp!
+  ): notes_utilisateurs_mutation_response
+
+  """
+  delete single row from the table: "notes_utilisateurs"
+  """
+  delete_notes_utilisateurs_by_pk(id_note_utilisateur: Int!): notes_utilisateurs
+
+  """
+  delete data from the table: "utilisateur"
+  """
+  delete_utilisateur(
+    """filter the rows which have to be deleted"""
+    where: utilisateur_bool_exp!
+  ): utilisateur_mutation_response
+
+  """
+  delete single row from the table: "utilisateur"
+  """
+  delete_utilisateur_by_pk(id: Int!): utilisateur
+
+  """
+  insert data into the table: "notes"
+  """
+  insert_notes(
+    """the rows to be inserted"""
+    objects: [notes_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: notes_on_conflict
+  ): notes_mutation_response
+
+  """
+  insert a single row into the table: "notes"
+  """
+  insert_notes_one(
+    """the row to be inserted"""
+    object: notes_insert_input!
+
+    """on conflict condition"""
+    on_conflict: notes_on_conflict
+  ): notes
+
+  """
+  insert data into the table: "notes_utilisateurs"
+  """
+  insert_notes_utilisateurs(
+    """the rows to be inserted"""
+    objects: [notes_utilisateurs_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: notes_utilisateurs_on_conflict
+  ): notes_utilisateurs_mutation_response
+
+  """
+  insert a single row into the table: "notes_utilisateurs"
+  """
+  insert_notes_utilisateurs_one(
+    """the row to be inserted"""
+    object: notes_utilisateurs_insert_input!
+
+    """on conflict condition"""
+    on_conflict: notes_utilisateurs_on_conflict
+  ): notes_utilisateurs
+
+  """
+  insert data into the table: "utilisateur"
+  """
+  insert_utilisateur(
+    """the rows to be inserted"""
+    objects: [utilisateur_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: utilisateur_on_conflict
+  ): utilisateur_mutation_response
+
+  """
+  insert a single row into the table: "utilisateur"
+  """
+  insert_utilisateur_one(
+    """the row to be inserted"""
+    object: utilisateur_insert_input!
+
+    """on conflict condition"""
+    on_conflict: utilisateur_on_conflict
+  ): utilisateur
+
+  """
+  update data of the table: "notes"
+  """
+  update_notes(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: notes_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: notes_set_input
+
+    """filter the rows which have to be updated"""
+    where: notes_bool_exp!
+  ): notes_mutation_response
+
+  """
+  update single row of the table: "notes"
+  """
+  update_notes_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: notes_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: notes_set_input
+    pk_columns: notes_pk_columns_input!
+  ): notes
+
+  """
+  update data of the table: "notes_utilisateurs"
+  """
+  update_notes_utilisateurs(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: notes_utilisateurs_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: notes_utilisateurs_set_input
+
+    """filter the rows which have to be updated"""
+    where: notes_utilisateurs_bool_exp!
+  ): notes_utilisateurs_mutation_response
+
+  """
+  update single row of the table: "notes_utilisateurs"
+  """
+  update_notes_utilisateurs_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: notes_utilisateurs_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: notes_utilisateurs_set_input
+    pk_columns: notes_utilisateurs_pk_columns_input!
+  ): notes_utilisateurs
+
+  """
+  update data of the table: "utilisateur"
+  """
+  update_utilisateur(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: utilisateur_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: utilisateur_set_input
+
+    """filter the rows which have to be updated"""
+    where: utilisateur_bool_exp!
+  ): utilisateur_mutation_response
+
+  """
+  update single row of the table: "utilisateur"
+  """
+  update_utilisateur_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: utilisateur_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: utilisateur_set_input
+    pk_columns: utilisateur_pk_columns_input!
+  ): utilisateur
+}
+
+"""
+columns and relationships of "notes"
+"""
+type notes {
+  active: Boolean!
+  contenu: String!
+  created_at: timestamptz!
+  id: Int!
+
+  """
+  fetch data from the table: "notes_utilisateurs"
+  """
+  notes_utilisateurs(
+    """distinct select on columns"""
+    distinct_on: [notes_utilisateurs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_utilisateurs_order_by!]
+
+    """filter the rows returned"""
+    where: notes_utilisateurs_bool_exp
+  ): [notes_utilisateurs!]!
+
+  """An aggregate relationship"""
+  notes_utilisateurs_aggregate(
+    """distinct select on columns"""
+    distinct_on: [notes_utilisateurs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_utilisateurs_order_by!]
+
+    """filter the rows returned"""
+    where: notes_utilisateurs_bool_exp
+  ): notes_utilisateurs_aggregate!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "notes"
+"""
+type notes_aggregate {
+  aggregate: notes_aggregate_fields
+  nodes: [notes!]!
+}
+
+"""
+aggregate fields of "notes"
+"""
+type notes_aggregate_fields {
+  avg: notes_avg_fields
+  count(columns: [notes_select_column!], distinct: Boolean): Int!
+  max: notes_max_fields
+  min: notes_min_fields
+  stddev: notes_stddev_fields
+  stddev_pop: notes_stddev_pop_fields
+  stddev_samp: notes_stddev_samp_fields
+  sum: notes_sum_fields
+  var_pop: notes_var_pop_fields
+  var_samp: notes_var_samp_fields
+  variance: notes_variance_fields
+}
+
+"""aggregate avg on columns"""
+type notes_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "notes". All fields are combined with a logical 'AND'.
+"""
+input notes_bool_exp {
+  _and: [notes_bool_exp!]
+  _not: notes_bool_exp
+  _or: [notes_bool_exp!]
+  active: Boolean_comparison_exp
+  contenu: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: Int_comparison_exp
+  notes_utilisateurs: notes_utilisateurs_bool_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "notes"
+"""
+enum notes_constraint {
+  """unique or primary key constraint"""
+  notes_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "notes"
+"""
+input notes_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "notes"
+"""
+input notes_insert_input {
+  active: Boolean
+  contenu: String
+  created_at: timestamptz
+  id: Int
+  notes_utilisateurs: notes_utilisateurs_arr_rel_insert_input
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type notes_max_fields {
+  contenu: String
+  created_at: timestamptz
+  id: Int
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type notes_min_fields {
+  contenu: String
+  created_at: timestamptz
+  id: Int
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "notes"
+"""
+type notes_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [notes!]!
+}
+
+"""
+input type for inserting object relation for remote table "notes"
+"""
+input notes_obj_rel_insert_input {
+  data: notes_insert_input!
+
+  """on conflict condition"""
+  on_conflict: notes_on_conflict
+}
+
+"""
+on conflict condition type for table "notes"
+"""
+input notes_on_conflict {
+  constraint: notes_constraint!
+  update_columns: [notes_update_column!]! = []
+  where: notes_bool_exp
+}
+
+"""Ordering options when selecting data from "notes"."""
+input notes_order_by {
+  active: order_by
+  contenu: order_by
+  created_at: order_by
+  id: order_by
+  notes_utilisateurs_aggregate: notes_utilisateurs_aggregate_order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: notes"""
+input notes_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "notes"
+"""
+enum notes_select_column {
+  """column name"""
+  active
+
+  """column name"""
+  contenu
+
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "notes"
+"""
+input notes_set_input {
+  active: Boolean
+  contenu: String
+  created_at: timestamptz
+  id: Int
+  updated_at: timestamptz
+}
+
+"""aggregate stddev on columns"""
+type notes_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type notes_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type notes_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type notes_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "notes"
+"""
+enum notes_update_column {
+  """column name"""
+  active
+
+  """column name"""
+  contenu
+
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  updated_at
+}
+
+"""
+columns and relationships of "notes_utilisateurs"
+"""
+type notes_utilisateurs {
+  id_note: Int!
+  id_note_utilisateur: Int!
+  id_utilisateur: Int!
+
+  """An object relationship"""
+  note: notes!
+
+  """An object relationship"""
+  utilisateur: utilisateur!
+}
+
+"""
+aggregated selection of "notes_utilisateurs"
+"""
+type notes_utilisateurs_aggregate {
+  aggregate: notes_utilisateurs_aggregate_fields
+  nodes: [notes_utilisateurs!]!
+}
+
+"""
+aggregate fields of "notes_utilisateurs"
+"""
+type notes_utilisateurs_aggregate_fields {
+  avg: notes_utilisateurs_avg_fields
+  count(columns: [notes_utilisateurs_select_column!], distinct: Boolean): Int!
+  max: notes_utilisateurs_max_fields
+  min: notes_utilisateurs_min_fields
+  stddev: notes_utilisateurs_stddev_fields
+  stddev_pop: notes_utilisateurs_stddev_pop_fields
+  stddev_samp: notes_utilisateurs_stddev_samp_fields
+  sum: notes_utilisateurs_sum_fields
+  var_pop: notes_utilisateurs_var_pop_fields
+  var_samp: notes_utilisateurs_var_samp_fields
+  variance: notes_utilisateurs_variance_fields
+}
+
+"""
+order by aggregate values of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_aggregate_order_by {
+  avg: notes_utilisateurs_avg_order_by
+  count: order_by
+  max: notes_utilisateurs_max_order_by
+  min: notes_utilisateurs_min_order_by
+  stddev: notes_utilisateurs_stddev_order_by
+  stddev_pop: notes_utilisateurs_stddev_pop_order_by
+  stddev_samp: notes_utilisateurs_stddev_samp_order_by
+  sum: notes_utilisateurs_sum_order_by
+  var_pop: notes_utilisateurs_var_pop_order_by
+  var_samp: notes_utilisateurs_var_samp_order_by
+  variance: notes_utilisateurs_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "notes_utilisateurs"
+"""
+input notes_utilisateurs_arr_rel_insert_input {
+  data: [notes_utilisateurs_insert_input!]!
+
+  """on conflict condition"""
+  on_conflict: notes_utilisateurs_on_conflict
+}
+
+"""aggregate avg on columns"""
+type notes_utilisateurs_avg_fields {
+  id_note: Float
+  id_note_utilisateur: Float
+  id_utilisateur: Float
+}
+
+"""
+order by avg() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_avg_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "notes_utilisateurs". All fields are combined with a logical 'AND'.
+"""
+input notes_utilisateurs_bool_exp {
+  _and: [notes_utilisateurs_bool_exp!]
+  _not: notes_utilisateurs_bool_exp
+  _or: [notes_utilisateurs_bool_exp!]
+  id_note: Int_comparison_exp
+  id_note_utilisateur: Int_comparison_exp
+  id_utilisateur: Int_comparison_exp
+  note: notes_bool_exp
+  utilisateur: utilisateur_bool_exp
+}
+
+"""
+unique or primary key constraints on table "notes_utilisateurs"
+"""
+enum notes_utilisateurs_constraint {
+  """unique or primary key constraint"""
+  notes_utilisateurs_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "notes_utilisateurs"
+"""
+input notes_utilisateurs_inc_input {
+  id_note: Int
+  id_note_utilisateur: Int
+  id_utilisateur: Int
+}
+
+"""
+input type for inserting data into table "notes_utilisateurs"
+"""
+input notes_utilisateurs_insert_input {
+  id_note: Int
+  id_note_utilisateur: Int
+  id_utilisateur: Int
+  note: notes_obj_rel_insert_input
+  utilisateur: utilisateur_obj_rel_insert_input
+}
+
+"""aggregate max on columns"""
+type notes_utilisateurs_max_fields {
+  id_note: Int
+  id_note_utilisateur: Int
+  id_utilisateur: Int
+}
+
+"""
+order by max() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_max_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""aggregate min on columns"""
+type notes_utilisateurs_min_fields {
+  id_note: Int
+  id_note_utilisateur: Int
+  id_utilisateur: Int
+}
+
+"""
+order by min() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_min_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""
+response of any mutation on the table "notes_utilisateurs"
+"""
+type notes_utilisateurs_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [notes_utilisateurs!]!
+}
+
+"""
+on conflict condition type for table "notes_utilisateurs"
+"""
+input notes_utilisateurs_on_conflict {
+  constraint: notes_utilisateurs_constraint!
+  update_columns: [notes_utilisateurs_update_column!]! = []
+  where: notes_utilisateurs_bool_exp
+}
+
+"""Ordering options when selecting data from "notes_utilisateurs"."""
+input notes_utilisateurs_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+  note: notes_order_by
+  utilisateur: utilisateur_order_by
+}
+
+"""primary key columns input for table: notes_utilisateurs"""
+input notes_utilisateurs_pk_columns_input {
+  id_note_utilisateur: Int!
+}
+
+"""
+select columns of table "notes_utilisateurs"
+"""
+enum notes_utilisateurs_select_column {
+  """column name"""
+  id_note
+
+  """column name"""
+  id_note_utilisateur
+
+  """column name"""
+  id_utilisateur
+}
+
+"""
+input type for updating data in table "notes_utilisateurs"
+"""
+input notes_utilisateurs_set_input {
+  id_note: Int
+  id_note_utilisateur: Int
+  id_utilisateur: Int
+}
+
+"""aggregate stddev on columns"""
+type notes_utilisateurs_stddev_fields {
+  id_note: Float
+  id_note_utilisateur: Float
+  id_utilisateur: Float
+}
+
+"""
+order by stddev() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_stddev_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type notes_utilisateurs_stddev_pop_fields {
+  id_note: Float
+  id_note_utilisateur: Float
+  id_utilisateur: Float
+}
+
+"""
+order by stddev_pop() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_stddev_pop_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type notes_utilisateurs_stddev_samp_fields {
+  id_note: Float
+  id_note_utilisateur: Float
+  id_utilisateur: Float
+}
+
+"""
+order by stddev_samp() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_stddev_samp_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""aggregate sum on columns"""
+type notes_utilisateurs_sum_fields {
+  id_note: Int
+  id_note_utilisateur: Int
+  id_utilisateur: Int
+}
+
+"""
+order by sum() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_sum_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""
+update columns of table "notes_utilisateurs"
+"""
+enum notes_utilisateurs_update_column {
+  """column name"""
+  id_note
+
+  """column name"""
+  id_note_utilisateur
+
+  """column name"""
+  id_utilisateur
+}
+
+"""aggregate var_pop on columns"""
+type notes_utilisateurs_var_pop_fields {
+  id_note: Float
+  id_note_utilisateur: Float
+  id_utilisateur: Float
+}
+
+"""
+order by var_pop() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_var_pop_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""aggregate var_samp on columns"""
+type notes_utilisateurs_var_samp_fields {
+  id_note: Float
+  id_note_utilisateur: Float
+  id_utilisateur: Float
+}
+
+"""
+order by var_samp() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_var_samp_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""aggregate variance on columns"""
+type notes_utilisateurs_variance_fields {
+  id_note: Float
+  id_note_utilisateur: Float
+  id_utilisateur: Float
+}
+
+"""
+order by variance() on columns of table "notes_utilisateurs"
+"""
+input notes_utilisateurs_variance_order_by {
+  id_note: order_by
+  id_note_utilisateur: order_by
+  id_utilisateur: order_by
+}
+
+"""aggregate var_pop on columns"""
+type notes_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type notes_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type notes_variance_fields {
+  id: Float
+}
+
+"""column ordering options"""
+enum order_by {
+  """in ascending order, nulls last"""
+  asc
+
+  """in ascending order, nulls first"""
+  asc_nulls_first
+
+  """in ascending order, nulls last"""
+  asc_nulls_last
+
+  """in descending order, nulls first"""
+  desc
+
+  """in descending order, nulls first"""
+  desc_nulls_first
+
+  """in descending order, nulls last"""
+  desc_nulls_last
+}
+
+type query_root {
+  """
+  fetch data from the table: "notes"
+  """
+  notes(
+    """distinct select on columns"""
+    distinct_on: [notes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_order_by!]
+
+    """filter the rows returned"""
+    where: notes_bool_exp
+  ): [notes!]!
+
+  """
+  fetch aggregated fields from the table: "notes"
+  """
+  notes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [notes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_order_by!]
+
+    """filter the rows returned"""
+    where: notes_bool_exp
+  ): notes_aggregate!
+
+  """fetch data from the table: "notes" using primary key columns"""
+  notes_by_pk(id: Int!): notes
+
+  """
+  fetch data from the table: "notes_utilisateurs"
+  """
+  notes_utilisateurs(
+    """distinct select on columns"""
+    distinct_on: [notes_utilisateurs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_utilisateurs_order_by!]
+
+    """filter the rows returned"""
+    where: notes_utilisateurs_bool_exp
+  ): [notes_utilisateurs!]!
+
+  """An aggregate relationship"""
+  notes_utilisateurs_aggregate(
+    """distinct select on columns"""
+    distinct_on: [notes_utilisateurs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_utilisateurs_order_by!]
+
+    """filter the rows returned"""
+    where: notes_utilisateurs_bool_exp
+  ): notes_utilisateurs_aggregate!
+
+  """
+  fetch data from the table: "notes_utilisateurs" using primary key columns
+  """
+  notes_utilisateurs_by_pk(id_note_utilisateur: Int!): notes_utilisateurs
+
+  """
+  fetch data from the table: "utilisateur"
+  """
+  utilisateur(
+    """distinct select on columns"""
+    distinct_on: [utilisateur_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [utilisateur_order_by!]
+
+    """filter the rows returned"""
+    where: utilisateur_bool_exp
+  ): [utilisateur!]!
+
+  """
+  fetch aggregated fields from the table: "utilisateur"
+  """
+  utilisateur_aggregate(
+    """distinct select on columns"""
+    distinct_on: [utilisateur_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [utilisateur_order_by!]
+
+    """filter the rows returned"""
+    where: utilisateur_bool_exp
+  ): utilisateur_aggregate!
+
+  """fetch data from the table: "utilisateur" using primary key columns"""
+  utilisateur_by_pk(id: Int!): utilisateur
+}
+
+type subscription_root {
+  """
+  fetch data from the table: "notes"
+  """
+  notes(
+    """distinct select on columns"""
+    distinct_on: [notes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_order_by!]
+
+    """filter the rows returned"""
+    where: notes_bool_exp
+  ): [notes!]!
+
+  """
+  fetch aggregated fields from the table: "notes"
+  """
+  notes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [notes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_order_by!]
+
+    """filter the rows returned"""
+    where: notes_bool_exp
+  ): notes_aggregate!
+
+  """fetch data from the table: "notes" using primary key columns"""
+  notes_by_pk(id: Int!): notes
+
+  """
+  fetch data from the table: "notes_utilisateurs"
+  """
+  notes_utilisateurs(
+    """distinct select on columns"""
+    distinct_on: [notes_utilisateurs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_utilisateurs_order_by!]
+
+    """filter the rows returned"""
+    where: notes_utilisateurs_bool_exp
+  ): [notes_utilisateurs!]!
+
+  """An aggregate relationship"""
+  notes_utilisateurs_aggregate(
+    """distinct select on columns"""
+    distinct_on: [notes_utilisateurs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_utilisateurs_order_by!]
+
+    """filter the rows returned"""
+    where: notes_utilisateurs_bool_exp
+  ): notes_utilisateurs_aggregate!
+
+  """
+  fetch data from the table: "notes_utilisateurs" using primary key columns
+  """
+  notes_utilisateurs_by_pk(id_note_utilisateur: Int!): notes_utilisateurs
+
+  """
+  fetch data from the table: "utilisateur"
+  """
+  utilisateur(
+    """distinct select on columns"""
+    distinct_on: [utilisateur_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [utilisateur_order_by!]
+
+    """filter the rows returned"""
+    where: utilisateur_bool_exp
+  ): [utilisateur!]!
+
+  """
+  fetch aggregated fields from the table: "utilisateur"
+  """
+  utilisateur_aggregate(
+    """distinct select on columns"""
+    distinct_on: [utilisateur_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [utilisateur_order_by!]
+
+    """filter the rows returned"""
+    where: utilisateur_bool_exp
+  ): utilisateur_aggregate!
+
+  """fetch data from the table: "utilisateur" using primary key columns"""
+  utilisateur_by_pk(id: Int!): utilisateur
+}
+
+scalar timestamptz
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
+input timestamptz_comparison_exp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _is_null: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
+"""
+columns and relationships of "utilisateur"
+"""
+type utilisateur {
+  created_at: timestamptz!
+  id: Int!
+
+  """
+  fetch data from the table: "notes_utilisateurs"
+  """
+  notes_utilisateurs(
+    """distinct select on columns"""
+    distinct_on: [notes_utilisateurs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_utilisateurs_order_by!]
+
+    """filter the rows returned"""
+    where: notes_utilisateurs_bool_exp
+  ): [notes_utilisateurs!]!
+
+  """An aggregate relationship"""
+  notes_utilisateurs_aggregate(
+    """distinct select on columns"""
+    distinct_on: [notes_utilisateurs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notes_utilisateurs_order_by!]
+
+    """filter the rows returned"""
+    where: notes_utilisateurs_bool_exp
+  ): notes_utilisateurs_aggregate!
+  pseudonyme: String!
+}
+
+"""
+aggregated selection of "utilisateur"
+"""
+type utilisateur_aggregate {
+  aggregate: utilisateur_aggregate_fields
+  nodes: [utilisateur!]!
+}
+
+"""
+aggregate fields of "utilisateur"
+"""
+type utilisateur_aggregate_fields {
+  avg: utilisateur_avg_fields
+  count(columns: [utilisateur_select_column!], distinct: Boolean): Int!
+  max: utilisateur_max_fields
+  min: utilisateur_min_fields
+  stddev: utilisateur_stddev_fields
+  stddev_pop: utilisateur_stddev_pop_fields
+  stddev_samp: utilisateur_stddev_samp_fields
+  sum: utilisateur_sum_fields
+  var_pop: utilisateur_var_pop_fields
+  var_samp: utilisateur_var_samp_fields
+  variance: utilisateur_variance_fields
+}
+
+"""aggregate avg on columns"""
+type utilisateur_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "utilisateur". All fields are combined with a logical 'AND'.
+"""
+input utilisateur_bool_exp {
+  _and: [utilisateur_bool_exp!]
+  _not: utilisateur_bool_exp
+  _or: [utilisateur_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: Int_comparison_exp
+  notes_utilisateurs: notes_utilisateurs_bool_exp
+  pseudonyme: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "utilisateur"
+"""
+enum utilisateur_constraint {
+  """unique or primary key constraint"""
+  utilisateur_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "utilisateur"
+"""
+input utilisateur_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "utilisateur"
+"""
+input utilisateur_insert_input {
+  created_at: timestamptz
+  id: Int
+  notes_utilisateurs: notes_utilisateurs_arr_rel_insert_input
+  pseudonyme: String
+}
+
+"""aggregate max on columns"""
+type utilisateur_max_fields {
+  created_at: timestamptz
+  id: Int
+  pseudonyme: String
+}
+
+"""aggregate min on columns"""
+type utilisateur_min_fields {
+  created_at: timestamptz
+  id: Int
+  pseudonyme: String
+}
+
+"""
+response of any mutation on the table "utilisateur"
+"""
+type utilisateur_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [utilisateur!]!
+}
+
+"""
+input type for inserting object relation for remote table "utilisateur"
+"""
+input utilisateur_obj_rel_insert_input {
+  data: utilisateur_insert_input!
+
+  """on conflict condition"""
+  on_conflict: utilisateur_on_conflict
+}
+
+"""
+on conflict condition type for table "utilisateur"
+"""
+input utilisateur_on_conflict {
+  constraint: utilisateur_constraint!
+  update_columns: [utilisateur_update_column!]! = []
+  where: utilisateur_bool_exp
+}
+
+"""Ordering options when selecting data from "utilisateur"."""
+input utilisateur_order_by {
+  created_at: order_by
+  id: order_by
+  notes_utilisateurs_aggregate: notes_utilisateurs_aggregate_order_by
+  pseudonyme: order_by
+}
+
+"""primary key columns input for table: utilisateur"""
+input utilisateur_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "utilisateur"
+"""
+enum utilisateur_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  pseudonyme
+}
+
+"""
+input type for updating data in table "utilisateur"
+"""
+input utilisateur_set_input {
+  created_at: timestamptz
+  id: Int
+  pseudonyme: String
+}
+
+"""aggregate stddev on columns"""
+type utilisateur_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type utilisateur_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type utilisateur_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type utilisateur_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "utilisateur"
+"""
+enum utilisateur_update_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  pseudonyme
+}
+
+"""aggregate var_pop on columns"""
+type utilisateur_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type utilisateur_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type utilisateur_variance_fields {
+  id: Float
+}
