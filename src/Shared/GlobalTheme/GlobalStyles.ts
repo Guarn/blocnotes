@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
-import { Theme } from "./interface";
+import { createGlobalStyle } from 'styled-components';
+import { Theme } from './interface';
 
-export const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
+const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
   html,body,#root {
     padding: 0;
     margin: 0;
@@ -11,3 +11,5 @@ export const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
     color: ${({ theme }) => theme.text.normal};
     transition: background-color 500ms, color 500ms, border-color 500ms;
   }`;
+
+export default GlobalStyles;

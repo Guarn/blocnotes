@@ -1,10 +1,16 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -115,42 +121,35 @@ export type Mutation_Root = {
   update_utilisateur_by_pk?: Maybe<Utilisateur>;
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_NotesArgs = {
   where: Notes_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Notes_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_Notes_UtilisateursArgs = {
   where: Notes_Utilisateurs_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Notes_Utilisateurs_By_PkArgs = {
   id_note_utilisateur: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_UtilisateurArgs = {
   where: Utilisateur_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_Utilisateur_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_NotesArgs = {
@@ -158,13 +157,11 @@ export type Mutation_RootInsert_NotesArgs = {
   on_conflict?: Maybe<Notes_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Notes_OneArgs = {
   object: Notes_Insert_Input;
   on_conflict?: Maybe<Notes_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_Notes_UtilisateursArgs = {
@@ -172,13 +169,11 @@ export type Mutation_RootInsert_Notes_UtilisateursArgs = {
   on_conflict?: Maybe<Notes_Utilisateurs_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Notes_Utilisateurs_OneArgs = {
   object: Notes_Utilisateurs_Insert_Input;
   on_conflict?: Maybe<Notes_Utilisateurs_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_UtilisateurArgs = {
@@ -186,13 +181,11 @@ export type Mutation_RootInsert_UtilisateurArgs = {
   on_conflict?: Maybe<Utilisateur_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Utilisateur_OneArgs = {
   object: Utilisateur_Insert_Input;
   on_conflict?: Maybe<Utilisateur_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_NotesArgs = {
@@ -201,14 +194,12 @@ export type Mutation_RootUpdate_NotesArgs = {
   where: Notes_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Notes_By_PkArgs = {
   _inc?: Maybe<Notes_Inc_Input>;
   _set?: Maybe<Notes_Set_Input>;
   pk_columns: Notes_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_Notes_UtilisateursArgs = {
@@ -217,7 +208,6 @@ export type Mutation_RootUpdate_Notes_UtilisateursArgs = {
   where: Notes_Utilisateurs_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Notes_Utilisateurs_By_PkArgs = {
   _inc?: Maybe<Notes_Utilisateurs_Inc_Input>;
@@ -225,14 +215,12 @@ export type Mutation_RootUpdate_Notes_Utilisateurs_By_PkArgs = {
   pk_columns: Notes_Utilisateurs_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_UtilisateurArgs = {
   _inc?: Maybe<Utilisateur_Inc_Input>;
   _set?: Maybe<Utilisateur_Set_Input>;
   where: Utilisateur_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_Utilisateur_By_PkArgs = {
@@ -255,7 +243,6 @@ export type Notes = {
   updated_at: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "notes" */
 export type NotesNotes_UtilisateursArgs = {
   distinct_on?: Maybe<Array<Notes_Utilisateurs_Select_Column>>;
@@ -264,7 +251,6 @@ export type NotesNotes_UtilisateursArgs = {
   order_by?: Maybe<Array<Notes_Utilisateurs_Order_By>>;
   where?: Maybe<Notes_Utilisateurs_Bool_Exp>;
 };
-
 
 /** columns and relationships of "notes" */
 export type NotesNotes_Utilisateurs_AggregateArgs = {
@@ -298,7 +284,6 @@ export type Notes_Aggregate_Fields = {
   variance?: Maybe<Notes_Variance_Fields>;
 };
 
-
 /** aggregate fields of "notes" */
 export type Notes_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Notes_Select_Column>>;
@@ -327,7 +312,7 @@ export type Notes_Bool_Exp = {
 /** unique or primary key constraints on table "notes" */
 export enum Notes_Constraint {
   /** unique or primary key constraint */
-  NotesPkey = 'notes_pkey'
+  NotesPkey = 'notes_pkey',
 }
 
 /** input type for incrementing numeric columns in table "notes" */
@@ -412,7 +397,7 @@ export enum Notes_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 /** input type for updating data in table "notes" */
@@ -459,7 +444,7 @@ export enum Notes_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 /** columns and relationships of "notes_utilisateurs" */
@@ -496,7 +481,6 @@ export type Notes_Utilisateurs_Aggregate_Fields = {
   var_samp?: Maybe<Notes_Utilisateurs_Var_Samp_Fields>;
   variance?: Maybe<Notes_Utilisateurs_Variance_Fields>;
 };
-
 
 /** aggregate fields of "notes_utilisateurs" */
 export type Notes_Utilisateurs_Aggregate_FieldsCountArgs = {
@@ -556,7 +540,7 @@ export type Notes_Utilisateurs_Bool_Exp = {
 /** unique or primary key constraints on table "notes_utilisateurs" */
 export enum Notes_Utilisateurs_Constraint {
   /** unique or primary key constraint */
-  NotesUtilisateursPkey = 'notes_utilisateurs_pkey'
+  NotesUtilisateursPkey = 'notes_utilisateurs_pkey',
 }
 
 /** input type for incrementing numeric columns in table "notes_utilisateurs" */
@@ -642,7 +626,7 @@ export enum Notes_Utilisateurs_Select_Column {
   /** column name */
   IdNoteUtilisateur = 'id_note_utilisateur',
   /** column name */
-  IdUtilisateur = 'id_utilisateur'
+  IdUtilisateur = 'id_utilisateur',
 }
 
 /** input type for updating data in table "notes_utilisateurs" */
@@ -719,7 +703,7 @@ export enum Notes_Utilisateurs_Update_Column {
   /** column name */
   IdNoteUtilisateur = 'id_note_utilisateur',
   /** column name */
-  IdUtilisateur = 'id_utilisateur'
+  IdUtilisateur = 'id_utilisateur',
 }
 
 /** aggregate var_pop on columns */
@@ -798,7 +782,7 @@ export enum Order_By {
   /** in descending order, nulls first */
   DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last'
+  DescNullsLast = 'desc_nulls_last',
 }
 
 export type Query_Root = {
@@ -823,7 +807,6 @@ export type Query_Root = {
   utilisateur_by_pk?: Maybe<Utilisateur>;
 };
 
-
 export type Query_RootNotesArgs = {
   distinct_on?: Maybe<Array<Notes_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -831,7 +814,6 @@ export type Query_RootNotesArgs = {
   order_by?: Maybe<Array<Notes_Order_By>>;
   where?: Maybe<Notes_Bool_Exp>;
 };
-
 
 export type Query_RootNotes_AggregateArgs = {
   distinct_on?: Maybe<Array<Notes_Select_Column>>;
@@ -841,11 +823,9 @@ export type Query_RootNotes_AggregateArgs = {
   where?: Maybe<Notes_Bool_Exp>;
 };
 
-
 export type Query_RootNotes_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootNotes_UtilisateursArgs = {
   distinct_on?: Maybe<Array<Notes_Utilisateurs_Select_Column>>;
@@ -855,7 +835,6 @@ export type Query_RootNotes_UtilisateursArgs = {
   where?: Maybe<Notes_Utilisateurs_Bool_Exp>;
 };
 
-
 export type Query_RootNotes_Utilisateurs_AggregateArgs = {
   distinct_on?: Maybe<Array<Notes_Utilisateurs_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -864,11 +843,9 @@ export type Query_RootNotes_Utilisateurs_AggregateArgs = {
   where?: Maybe<Notes_Utilisateurs_Bool_Exp>;
 };
 
-
 export type Query_RootNotes_Utilisateurs_By_PkArgs = {
   id_note_utilisateur: Scalars['Int'];
 };
-
 
 export type Query_RootUtilisateurArgs = {
   distinct_on?: Maybe<Array<Utilisateur_Select_Column>>;
@@ -878,7 +855,6 @@ export type Query_RootUtilisateurArgs = {
   where?: Maybe<Utilisateur_Bool_Exp>;
 };
 
-
 export type Query_RootUtilisateur_AggregateArgs = {
   distinct_on?: Maybe<Array<Utilisateur_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -886,7 +862,6 @@ export type Query_RootUtilisateur_AggregateArgs = {
   order_by?: Maybe<Array<Utilisateur_Order_By>>;
   where?: Maybe<Utilisateur_Bool_Exp>;
 };
-
 
 export type Query_RootUtilisateur_By_PkArgs = {
   id: Scalars['Int'];
@@ -914,7 +889,6 @@ export type Subscription_Root = {
   utilisateur_by_pk?: Maybe<Utilisateur>;
 };
 
-
 export type Subscription_RootNotesArgs = {
   distinct_on?: Maybe<Array<Notes_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -922,7 +896,6 @@ export type Subscription_RootNotesArgs = {
   order_by?: Maybe<Array<Notes_Order_By>>;
   where?: Maybe<Notes_Bool_Exp>;
 };
-
 
 export type Subscription_RootNotes_AggregateArgs = {
   distinct_on?: Maybe<Array<Notes_Select_Column>>;
@@ -932,11 +905,9 @@ export type Subscription_RootNotes_AggregateArgs = {
   where?: Maybe<Notes_Bool_Exp>;
 };
 
-
 export type Subscription_RootNotes_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootNotes_UtilisateursArgs = {
   distinct_on?: Maybe<Array<Notes_Utilisateurs_Select_Column>>;
@@ -946,7 +917,6 @@ export type Subscription_RootNotes_UtilisateursArgs = {
   where?: Maybe<Notes_Utilisateurs_Bool_Exp>;
 };
 
-
 export type Subscription_RootNotes_Utilisateurs_AggregateArgs = {
   distinct_on?: Maybe<Array<Notes_Utilisateurs_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -955,11 +925,9 @@ export type Subscription_RootNotes_Utilisateurs_AggregateArgs = {
   where?: Maybe<Notes_Utilisateurs_Bool_Exp>;
 };
 
-
 export type Subscription_RootNotes_Utilisateurs_By_PkArgs = {
   id_note_utilisateur: Scalars['Int'];
 };
-
 
 export type Subscription_RootUtilisateurArgs = {
   distinct_on?: Maybe<Array<Utilisateur_Select_Column>>;
@@ -969,7 +937,6 @@ export type Subscription_RootUtilisateurArgs = {
   where?: Maybe<Utilisateur_Bool_Exp>;
 };
 
-
 export type Subscription_RootUtilisateur_AggregateArgs = {
   distinct_on?: Maybe<Array<Utilisateur_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -977,7 +944,6 @@ export type Subscription_RootUtilisateur_AggregateArgs = {
   order_by?: Maybe<Array<Utilisateur_Order_By>>;
   where?: Maybe<Utilisateur_Bool_Exp>;
 };
-
 
 export type Subscription_RootUtilisateur_By_PkArgs = {
   id: Scalars['Int'];
@@ -1008,7 +974,6 @@ export type Utilisateur = {
   pseudonyme: Scalars['String'];
 };
 
-
 /** columns and relationships of "utilisateur" */
 export type UtilisateurNotes_UtilisateursArgs = {
   distinct_on?: Maybe<Array<Notes_Utilisateurs_Select_Column>>;
@@ -1017,7 +982,6 @@ export type UtilisateurNotes_UtilisateursArgs = {
   order_by?: Maybe<Array<Notes_Utilisateurs_Order_By>>;
   where?: Maybe<Notes_Utilisateurs_Bool_Exp>;
 };
-
 
 /** columns and relationships of "utilisateur" */
 export type UtilisateurNotes_Utilisateurs_AggregateArgs = {
@@ -1051,7 +1015,6 @@ export type Utilisateur_Aggregate_Fields = {
   variance?: Maybe<Utilisateur_Variance_Fields>;
 };
 
-
 /** aggregate fields of "utilisateur" */
 export type Utilisateur_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Utilisateur_Select_Column>>;
@@ -1078,7 +1041,7 @@ export type Utilisateur_Bool_Exp = {
 /** unique or primary key constraints on table "utilisateur" */
 export enum Utilisateur_Constraint {
   /** unique or primary key constraint */
-  UtilisateurPkey = 'utilisateur_pkey'
+  UtilisateurPkey = 'utilisateur_pkey',
 }
 
 /** input type for incrementing numeric columns in table "utilisateur" */
@@ -1153,7 +1116,7 @@ export enum Utilisateur_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Pseudonyme = 'pseudonyme'
+  Pseudonyme = 'pseudonyme',
 }
 
 /** input type for updating data in table "utilisateur" */
@@ -1194,7 +1157,7 @@ export enum Utilisateur_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Pseudonyme = 'pseudonyme'
+  Pseudonyme = 'pseudonyme',
 }
 
 /** aggregate var_pop on columns */
@@ -1219,26 +1182,40 @@ export type GetUsersWithNotesQueryVariables = Exact<{
   nom: Scalars['String'];
 }>;
 
-
-export type GetUsersWithNotesQuery = { __typename?: 'query_root', utilisateur: Array<{ __typename?: 'utilisateur', pseudonyme: string, notes_utilisateurs: Array<{ __typename?: 'notes_utilisateurs', note: { __typename?: 'notes', notes_utilisateurs: Array<{ __typename?: 'notes_utilisateurs', utilisateur: { __typename?: 'utilisateur', pseudonyme: string } }> } }> }> };
-
+export type GetUsersWithNotesQuery = {
+  __typename?: 'query_root';
+  utilisateur: Array<{
+    __typename?: 'utilisateur';
+    pseudonyme: string;
+    notes_utilisateurs: Array<{
+      __typename?: 'notes_utilisateurs';
+      note: {
+        __typename?: 'notes';
+        notes_utilisateurs: Array<{
+          __typename?: 'notes_utilisateurs';
+          utilisateur: { __typename?: 'utilisateur'; pseudonyme: string };
+        }>;
+      };
+    }>;
+  }>;
+};
 
 export const GetUsersWithNotesDocument = gql`
-    query GetUsersWithNotes($nom: String!) {
-  utilisateur(where: {pseudonyme: {_eq: $nom}}) {
-    pseudonyme
-    notes_utilisateurs {
-      note {
-        notes_utilisateurs {
-          utilisateur {
-            pseudonyme
+  query GetUsersWithNotes($nom: String!) {
+    utilisateur(where: { pseudonyme: { _eq: $nom } }) {
+      pseudonyme
+      notes_utilisateurs {
+        note {
+          notes_utilisateurs {
+            utilisateur {
+              pseudonyme
+            }
           }
         }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetUsersWithNotesQuery__
@@ -1256,25 +1233,47 @@ export const GetUsersWithNotesDocument = gql`
  *   },
  * });
  */
-export function useGetUsersWithNotesQuery(baseOptions: Apollo.QueryHookOptions<GetUsersWithNotesQuery, GetUsersWithNotesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetUsersWithNotesQuery, GetUsersWithNotesQueryVariables>(GetUsersWithNotesDocument, options);
-      }
-export function useGetUsersWithNotesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUsersWithNotesQuery, GetUsersWithNotesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetUsersWithNotesQuery, GetUsersWithNotesQueryVariables>(GetUsersWithNotesDocument, options);
-        }
-export type GetUsersWithNotesQueryHookResult = ReturnType<typeof useGetUsersWithNotesQuery>;
-export type GetUsersWithNotesLazyQueryHookResult = ReturnType<typeof useGetUsersWithNotesLazyQuery>;
-export type GetUsersWithNotesQueryResult = Apollo.QueryResult<GetUsersWithNotesQuery, GetUsersWithNotesQueryVariables>;
+export function useGetUsersWithNotesQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetUsersWithNotesQuery,
+    GetUsersWithNotesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetUsersWithNotesQuery,
+    GetUsersWithNotesQueryVariables
+  >(GetUsersWithNotesDocument, options);
+}
+export function useGetUsersWithNotesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUsersWithNotesQuery,
+    GetUsersWithNotesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetUsersWithNotesQuery,
+    GetUsersWithNotesQueryVariables
+  >(GetUsersWithNotesDocument, options);
+}
+export type GetUsersWithNotesQueryHookResult = ReturnType<
+  typeof useGetUsersWithNotesQuery
+>;
+export type GetUsersWithNotesLazyQueryHookResult = ReturnType<
+  typeof useGetUsersWithNotesLazyQuery
+>;
+export type GetUsersWithNotesQueryResult = Apollo.QueryResult<
+  GetUsersWithNotesQuery,
+  GetUsersWithNotesQueryVariables
+>;
 
-      export interface PossibleTypesResultData {
-        possibleTypes: {
-          [key: string]: string[]
-        }
-      }
-      const result: PossibleTypesResultData = {
-  "possibleTypes": {}
+export interface PossibleTypesResultData {
+  possibleTypes: {
+    [key: string]: string[];
+  };
+}
+const result: PossibleTypesResultData = {
+  possibleTypes: {},
 };
-      export default result;
-    
+export default result;
