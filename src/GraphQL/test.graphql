@@ -1,5 +1,5 @@
-query GetUsersWithNotes {
-  utilisateur {
+query GetUsersWithNotes($nom: String!) {
+  utilisateur(where: { pseudonyme: { _eq: $nom } }) {
     pseudonyme
     notes_utilisateurs {
       note {

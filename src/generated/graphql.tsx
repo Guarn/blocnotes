@@ -1215,20 +1215,25 @@ export type Utilisateur_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-export type GetUsersWithNotesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetUsersWithNotesQueryVariables = Exact<{
+  nom: Scalars['String'];
+}>;
 
 
-export type GetUsersWithNotesQuery = { __typename?: 'query_root', utilisateur: Array<{ __typename?: 'utilisateur', pseudonyme: string, notes_utilisateurs: Array<{ __typename?: 'notes_utilisateurs', note: { __typename?: 'notes', contenu: string, active: boolean } }> }> };
+export type GetUsersWithNotesQuery = { __typename?: 'query_root', utilisateur: Array<{ __typename?: 'utilisateur', pseudonyme: string, notes_utilisateurs: Array<{ __typename?: 'notes_utilisateurs', note: { __typename?: 'notes', notes_utilisateurs: Array<{ __typename?: 'notes_utilisateurs', utilisateur: { __typename?: 'utilisateur', pseudonyme: string } }> } }> }> };
 
 
 export const GetUsersWithNotesDocument = gql`
-    query GetUsersWithNotes {
-  utilisateur {
+    query GetUsersWithNotes($nom: String!) {
+  utilisateur(where: {pseudonyme: {_eq: $nom}}) {
     pseudonyme
     notes_utilisateurs {
       note {
-        contenu
-        active
+        notes_utilisateurs {
+          utilisateur {
+            pseudonyme
+          }
+        }
       }
     }
   }
@@ -1247,10 +1252,11 @@ export const GetUsersWithNotesDocument = gql`
  * @example
  * const { data, loading, error } = useGetUsersWithNotesQuery({
  *   variables: {
+ *      nom: // value for 'nom'
  *   },
  * });
  */
-export function useGetUsersWithNotesQuery(baseOptions?: Apollo.QueryHookOptions<GetUsersWithNotesQuery, GetUsersWithNotesQueryVariables>) {
+export function useGetUsersWithNotesQuery(baseOptions: Apollo.QueryHookOptions<GetUsersWithNotesQuery, GetUsersWithNotesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetUsersWithNotesQuery, GetUsersWithNotesQueryVariables>(GetUsersWithNotesDocument, options);
       }
