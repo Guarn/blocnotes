@@ -5,12 +5,6 @@ const themeClair: Theme = {
     normal: '#FFF',
     assombri: '',
     pale: '',
-    transparent_clair_005: '',
-    transparent_clair_01: '',
-    transparent_clair_02: '',
-    transparent_sombre_005: '',
-    transparent_sombre_01: '',
-    transparent_sombre_02: '',
   },
   text: {
     normal: '#000',
@@ -21,6 +15,14 @@ const themeClair: Theme = {
     color2_pale: '',
     color3: '',
     color3_pale: '',
+  },
+  shadow: {
+    transparent_clair_005: '',
+    transparent_clair_01: '',
+    transparent_clair_02: '',
+    transparent_sombre_005: '',
+    transparent_sombre_01: '',
+    transparent_sombre_02: '',
   },
 };
 
