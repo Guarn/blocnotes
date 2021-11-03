@@ -1328,6 +1328,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/oswald@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-4.5.1.tgz#48f09df43bc840a05da3654241e95e43d004ff05"
+  integrity sha512-YwHphBXhgVKmwyEkNAqiBrYI+WLrxI9ZOQfGtoZjJHfDC3/SjwACSFeWdk0Sg7EHVcMAC5pppGPhJ7UJO4xo4A==
+
 "@gar/promisify@^1.0.1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
