@@ -1,0 +1,80 @@
+################################
+##### Queries utilisateurs #####
+################################
+
+query GetUsersWithNotes {
+  utilisateur {
+    id
+    pseudonyme
+    notes {
+      id
+      active
+      contenu
+      updated_at
+    }
+  }
+}
+
+query GetUserByPK($id: Int!) {
+  utilisateur_by_pk(id: $id) {
+    id
+    pseudonyme
+    created_at
+  }
+}
+
+query GetUserByName($pseudo: String!) {
+  utilisateur(where: { pseudonyme: { _ilike: $pseudo } }) {
+    id
+    pseudonyme
+    created_at
+  }
+}
+
+query GetUserWithNotesByPK($id: Int!) {
+  utilisateur_by_pk(id: $id) {
+    id
+    pseudonyme
+    created_at
+  }
+}
+
+query GetUserWithNotesByName($pseudo: String!) {
+  utilisateur(where: { pseudonyme: { _ilike: $pseudo } }) {
+    id
+    pseudonyme
+    created_at
+    notes {
+      id
+      active
+      contenu
+      updated_at
+    }
+  }
+}
+
+################################
+#### Mutations utilisateurs ####
+################################
+
+mutation AddUser($pseudo: String!) {
+  insert_utilisateur(objects: { pseudonyme: $pseudo }) {
+    returning {
+      id
+      created_at
+      pseudonyme
+    }
+  }
+}
+
+mutation DeleteUserByPK($id: Int!) {
+  delete_utilisateur_by_pk(id: $id) {
+    pseudonyme
+  }
+}
+
+mutation DeleteUserByName($pseudo: String!) {
+  delete_utilisateur(where: { pseudonyme: { _ilike: $pseudo } }) {
+    affected_rows
+  }
+}

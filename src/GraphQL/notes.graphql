@@ -1,0 +1,33 @@
+################################
+######### Queries notes ########
+################################
+
+query GetNotesWithUser {
+  notes {
+    id
+    active
+    contenu
+    updated_at
+    utilisateur {
+      id
+      pseudonyme
+    }
+  }
+}
+
+query GetNoteByPK($id: Int!) {
+  notes_by_pk(id: $id) {
+    id
+    active
+    contenu
+    updated_at
+    utilisateur {
+      id
+      pseudonyme
+    }
+  }
+}
+
+################################
+######## Mutations notes #######
+################################
