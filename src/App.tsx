@@ -1,5 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import useModeSombre from './CustomHooks/useModeSombre';
+import Accueil from './Pages/Accueil/Accueil';
 import GlobalStyles from './Shared/GlobalTheme/GlobalStyles';
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
         test
       </button>
       COUCOU
+      <Accueil />
     </ThemeProvider>
   );
 };

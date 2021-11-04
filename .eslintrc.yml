@@ -31,4 +31,7 @@ rules:
     'no-shadow': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'indent': 'off',
+    'react/prop-types': 'off',
+    'react/require-default-props': 'off',
+    'dot-notation': 'off',
   }
