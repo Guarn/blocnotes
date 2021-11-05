@@ -2,7 +2,7 @@ import { Theme } from './interface';
 
 const themeSombre: Theme = {
   body: {
-    normal: '#000',
+    normal: '#3A3C41',
     assombri: '',
     pale: '',
   },

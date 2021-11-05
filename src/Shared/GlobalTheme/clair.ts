@@ -2,7 +2,7 @@ import { Theme } from './interface';
 
 const themeClair: Theme = {
   body: {
-    normal: '#FFF',
+    normal: '#F2F2F2',
     assombri: '',
     pale: '',
   },
