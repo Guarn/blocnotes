@@ -1,8 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import { Theme } from './interface';
 import '@fontsource/oswald/latin.css';
 
-const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
+const GlobalStyles = createGlobalStyle`
   html,body,#root {
     padding: 0;
     margin: 0;

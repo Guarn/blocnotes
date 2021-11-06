@@ -1,6 +1,6 @@
-import { Theme } from './interface';
+import { DefaultTheme } from 'styled-components';
 
-const themeClair: Theme = {
+const themeClair: DefaultTheme = {
   body: {
     normal: '#F2F2F2',
     assombri: '',
@@ -25,6 +25,6 @@ const themeClair: Theme = {
     transparent_sombre_01: '',
     transparent_sombre_02: '',
   },
-};
+} as const;
 
 export default themeClair;

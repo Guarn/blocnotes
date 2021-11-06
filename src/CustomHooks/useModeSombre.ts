@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { DefaultTheme } from 'styled-components';
 import themeClair from '../Shared/GlobalTheme/clair';
-import { Theme } from '../Shared/GlobalTheme/interface';
 import themeSombre from '../Shared/GlobalTheme/sombre';
 
-const useModeSombre = (): [Theme, () => void] => {
-  const [theme, setTheme] = useState<Theme>(themeClair);
+const useModeSombre = (): [DefaultTheme, () => void] => {
+  const [theme, setTheme] = useState<DefaultTheme>(themeClair);
 
   const changeMode = () => {
     setTheme((oldTheme) =>

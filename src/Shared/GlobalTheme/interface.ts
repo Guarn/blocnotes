@@ -1,10 +1,3 @@
-export interface Theme {
-  body: BodyColors;
-  text: TextColors;
-  border: BorderColors;
-  shadow: ShadowColors;
-}
-
 export interface BodyColors {
   normal: string;
   assombri: string;

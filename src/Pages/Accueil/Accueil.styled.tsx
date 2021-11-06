@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
-import { Theme } from '../../Shared/GlobalTheme/interface';
 
 export const AccueilGlobal = styled.div`
   height: 100%;
@@ -10,7 +9,7 @@ export const AccueilGlobal = styled.div`
   align-items: center;
 `;
 
-export const Titre = styled.div<{ theme: Theme }>`
+export const Titre = styled.div`
   font-size: 80px;
   color: ${({ theme }) => theme.text.pale};
   transition: color 0.2s;

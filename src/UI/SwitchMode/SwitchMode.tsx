@@ -1,11 +1,11 @@
+import { DefaultTheme } from 'styled-components';
 import themeClair from '../../Shared/GlobalTheme/clair';
-import { Theme } from '../../Shared/GlobalTheme/interface';
 import Icone from '../Icone/Icone';
 import * as S from './SwitchMode.styled';
 
 interface SwichModeProps {
   onClick: () => void;
-  theme: Theme;
+  theme: DefaultTheme;
 }
 const SwitchMode = ({ onClick, theme }: SwichModeProps) => (
   <S.SwitchModeGlobal>

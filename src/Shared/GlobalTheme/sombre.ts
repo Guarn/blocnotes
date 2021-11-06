@@ -1,6 +1,6 @@
-import { Theme } from './interface';
+import { DefaultTheme } from 'styled-components';
 
-const themeSombre: Theme = {
+const themeSombre: DefaultTheme = {
   body: {
     normal: '#3A3C41',
     assombri: '',
