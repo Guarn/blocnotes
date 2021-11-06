@@ -4,12 +4,13 @@ const themeClair: Theme = {
   body: {
     normal: '#F2F2F2',
     assombri: '',
-    pale: '',
+    pale: 'white',
   },
+  border: { normal: '', assombri: '', pale: '#c6c6c6' },
   text: {
-    normal: '#000',
-    pale: '',
-    color1: '',
+    normal: '#3A3C41',
+    pale: '#BCBCBC',
+    color1: '#7E7E7E',
     color1_pale: '',
     color2: '',
     color2_pale: '',

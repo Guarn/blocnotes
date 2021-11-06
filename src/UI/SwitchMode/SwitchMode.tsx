@@ -9,28 +9,23 @@ interface SwichModeProps {
 }
 const SwitchMode = ({ onClick, theme }: SwichModeProps) => (
   <S.SwitchModeGlobal>
-    {theme === themeClair && (
-      <Icone
-        icone="JourNuit"
-        onClick={onClick}
-        style={{
-          size: 'extralarge',
-          couleurPrincipale: theme === themeClair ? 'white' : 'red',
-        }}
-        options={{ rotate: 180, isAnimated: true }}
-      />
-    )}
-    {theme !== themeClair && (
-      <Icone
-        icone="JourNuit"
-        onClick={onClick}
-        style={{
-          size: 'extralarge',
-          couleurPrincipale: theme === themeClair ? 'white' : 'red',
-        }}
-        options={{ rotate: 180, isAnimated: false }}
-      />
-    )}
+    <Icone
+      icone="JourNuit"
+      onClick={onClick}
+      style={{
+        size: 'extralarge',
+        couleurPrincipale: theme.text.normal,
+      }}
+      options={{
+        zoom: { initial: 1, onHover: 1.2 },
+        rotation: {
+          initial: theme === themeClair ? 0 : 180,
+          onHover: theme === themeClair ? 0 : 180,
+        },
+        isAnimated: true,
+        animationDuration: 0.2,
+      }}
+    />
   </S.SwitchModeGlobal>
 );
 

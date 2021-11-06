@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
 import * as S from './Icone.styled';
 import { IIcone, TailleIcone } from './interfaces';
 import * as ComposantsIcones from './ListeIcones';
@@ -8,8 +6,8 @@ const Icone = ({
   icone,
   onClick,
   options = {
-    rotate: 80,
-    zoom: 1,
+    rotation: { initial: 0, onHover: 0 },
+    zoom: { initial: 1, onHover: 1 },
     isAnimated: false,
     animationDuration: 0.2,
   },
@@ -26,10 +24,15 @@ const Icone = ({
     <S.IconeGlobal
       onClick={onClick}
       size={TailleIcone[style.size || 'moyen']}
-      zoom={options.zoom || 0}
       animationDuration={options.animationDuration || 0}
+      rotation={options.rotation}
+      zoom={options.zoom}
+      isAnimated={options.isAnimated || false}
     >
-      <IconAsReact />
+      <IconAsReact
+        couleurPrincipale={style.couleurPrincipale}
+        couleurSecondaire={style.couleurSecondaire}
+      />
     </S.IconeGlobal>
   );
 };

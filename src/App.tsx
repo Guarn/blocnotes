@@ -10,7 +10,6 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-
       <Accueil />
       <SwitchMode onClick={changeMode} theme={theme} />
     </ThemeProvider>

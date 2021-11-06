@@ -34,4 +34,5 @@ rules:
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     'dot-notation': 'off',
+    'no-unused-vars': 'off',
   }

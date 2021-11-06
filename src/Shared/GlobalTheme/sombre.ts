@@ -4,12 +4,13 @@ const themeSombre: Theme = {
   body: {
     normal: '#3A3C41',
     assombri: '',
-    pale: '',
+    pale: '#313131',
   },
+  border: { normal: '', assombri: '', pale: '#575757' },
   text: {
-    normal: '#FFF',
-    pale: '',
-    color1: '',
+    normal: '#F2F2F2',
+    pale: '#676767',
+    color1: '#C1C1C1',
     color1_pale: '',
     color2: '',
     color2_pale: '',
