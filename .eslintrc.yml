@@ -35,4 +35,6 @@ rules:
     'react/require-default-props': 'off',
     'dot-notation': 'off',
     'no-unused-vars': 'off',
+    'object-curly-newline': 'off',
+    'operator-linebreak': 'off',
   }

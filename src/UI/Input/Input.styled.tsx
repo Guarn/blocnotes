@@ -24,7 +24,11 @@ export const ChampInput = styled.input`
   }
   &::placeholder {
     font-style: italic;
-    color: ${({ theme }) => theme.text.pale};
+    color: ${({ theme }) => theme.text.color1};
+    font-weight: 200;
   }
   transition: color 0.2s, background-color 0.2s, border 0.2s, box-shadow 0.2s;
+  font-size: 1.1rem;
+  letter-spacing: normal;
+  font-weight: 300;
 `;

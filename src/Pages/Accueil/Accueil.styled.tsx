@@ -9,7 +9,7 @@ export const AccueilGlobal = styled.div`
   align-items: center;
 `;
 
-export const Titre = styled.div`
+export const Titre = styled.span`
   font-size: 80px;
   color: ${({ theme }) => theme.text.pale};
   transition: color 0.2s;
