@@ -6,14 +6,15 @@ export const ValidationGlobal = styled.div`
   flex-direction: column;
   width: 40%;
   margin-top: 10px;
+  background-color: ${({ theme }) => theme.body.pale};
+  border: 1px solid ${({ theme }) => theme.border.pale};
+  font-weight: 200;
+  color: salmon;
+  font-size: 0.8rem;
+  border-radius: 6px;
 `;
 
 export const ErrorCtn = styled.div`
   padding: 5px;
   margin-top: 2px;
-  border: 1px solid ${({ theme }) => theme.border.pale};
-  font-size: 0.8rem;
-  background-color: ${({ theme }) => theme.body.pale};
-  color: salmon;
-  font-weight: 200;
 `;

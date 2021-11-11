@@ -12,6 +12,10 @@ const GlobalStyles = createGlobalStyle`
     transition: background-color 500ms, color 500ms, border-color 500ms;
     font-family: "Oswald";
     font-size: 16px;
+
+    input {
+    font-family: "Oswald";
+    }
   }`;
 
 export default GlobalStyles;

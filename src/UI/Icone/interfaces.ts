@@ -12,9 +12,9 @@ export enum TailleIcone {
 
 export interface IIcone {
   icone: NomIcones;
-  onClick: () => void;
-  style: IconeStyle;
-  options: IconeOptions;
+  onClick?: () => void;
+  style?: IconeStyle;
+  options?: IconeOptions;
 }
 
 export interface IconeOptions {
@@ -26,6 +26,10 @@ export interface IconeOptions {
   isAnimated?: boolean;
   /** Durée de l'animation de survol */
   animationDuration?: number;
+  top?: number;
+  left?: number;
+  right?: number;
+  bottom?: number;
 }
 
 export interface IconeStyle {

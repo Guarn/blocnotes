@@ -10,6 +10,10 @@ const Icone = ({
     zoom: { initial: 1, onHover: 1 },
     isAnimated: false,
     animationDuration: 0.2,
+    top: undefined,
+    left: undefined,
+    right: undefined,
+    bottom: undefined,
   },
   style = {
     size: 'moyen',
@@ -28,6 +32,10 @@ const Icone = ({
       rotation={options.rotation}
       zoom={options.zoom}
       isAnimated={options.isAnimated || false}
+      top={options.top}
+      left={options.left}
+      right={options.right}
+      bottom={options.bottom}
     >
       <IconAsReact
         couleurPrincipale={style.couleurPrincipale}

@@ -9,12 +9,16 @@ const Accueil = () => {
     <S.AccueilGlobal>
       <S.Titre>BLOC NOTES</S.Titre>
       <Input
-        value={inputValue}
-        setValue={setInputValue}
+        valeur={inputValue}
+        setValeur={setInputValue}
         placeholder="Ajouter une note"
+        options={{ min: 3, specialChar: false, frenchChar: false, max: 6 }}
       />
+      <T />
     </S.AccueilGlobal>
   );
 };
+
+const T = () => <div>TEST</div>;
 
 export default Accueil;

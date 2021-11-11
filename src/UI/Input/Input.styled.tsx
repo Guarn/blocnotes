@@ -8,12 +8,19 @@ export const InputGlobal = styled.div`
   align-items: center;
   margin-top: 20px;
 `;
+InputGlobal.displayName = 'InputGlobal';
+
+export const ChampInputCtn = styled.div`
+  width: 40%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+`;
 
 export const ChampInput = styled.input`
-  width: 40%;
+  box-sizing: border-box;
   outline: none;
   padding: 8px 15px;
-  font-family: inherit;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.border.pale};
   transition: box-shadow 0.2s;

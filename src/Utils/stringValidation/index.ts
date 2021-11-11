@@ -4,7 +4,7 @@ import {
   StringValidationIn,
 } from './interfaces';
 
-const specialCharReg = /[@#&"'()`$*€£%+=:/_-§]/;
+const specialCharReg = /[@#&"()`$*€£%+=:/_\-§]/;
 const frenchCharReg = /[àâäéèêëîïôöùûü]/i;
 
 const checkString = ({
@@ -74,7 +74,7 @@ const checkMax = (val: string, maxValue: number): CheckReturnType => {
 };
 
 const checkSpecialChar = (val: string) => {
-  const isValid = specialCharReg.test(val);
+  const isValid = !specialCharReg.test(val);
 
   if (!isValid) {
     return {
