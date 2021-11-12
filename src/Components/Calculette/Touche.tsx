@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/require-default-props */
 import React from 'react';
 import * as S from './Touche.styled';
 

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 import { Col } from './Calculette.styled';
 
@@ -18,8 +17,4 @@ export const ToucheGlobal = styled(Col)<{ couleur: string; taille: number }>`
   &:hover {
     opacity: 0.8;
   }
-`;
-
-export const ToucheDefaut = styled(ToucheGlobal)`
-  background-color: red;
 `;

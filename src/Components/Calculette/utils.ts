@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { Chiffre, Operateur } from './interfaces';
 
 export const calcul = (nbr1: Chiffre, nbr2: Chiffre, operateur: Operateur) => {
