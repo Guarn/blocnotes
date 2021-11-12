@@ -4,14 +4,18 @@ import styled from 'styled-components';
 export const ValidationGlobal = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40%;
-  margin-top: 10px;
+  width: 100%;
   background-color: ${({ theme }) => theme.body.pale};
   border: 1px solid ${({ theme }) => theme.border.pale};
-  font-weight: 200;
+  font-weight: 400;
   color: salmon;
-  font-size: 0.8rem;
+  padding-left: 10px;
+  font-size: 1rem;
   border-radius: 6px;
+  position: absolute;
+  box-sizing: border-box;
+  top: 45px;
+  left: 0;
 `;
 
 export const ErrorCtn = styled.div`

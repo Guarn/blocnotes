@@ -70,9 +70,8 @@ const Input = ({
             }}
           />
         )}
+        {isFocus && !isValid && <Validation erreurs={erreurs} />}
       </S.ChampInputCtn>
-
-      {isFocus && !isValid && <Validation erreurs={erreurs} />}
     </S.InputGlobal>
   );
 };

@@ -4,7 +4,7 @@ import {
   StringValidationIn,
 } from './interfaces';
 
-const specialCharReg = /[@#&"()`$*€£%+=:/_\-§]/;
+const specialCharReg = /[@#&"()[\]{}`$*€£%+=:/_\-§]/;
 const frenchCharReg = /[àâäéèêëîïôöùûü]/i;
 
 const checkString = ({

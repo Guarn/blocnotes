@@ -15,6 +15,7 @@ export const ChampInputCtn = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const ChampInput = styled.input`

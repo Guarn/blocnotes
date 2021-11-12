@@ -1333,6 +1333,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-4.5.1.tgz#48f09df43bc840a05da3654241e95e43d004ff05"
   integrity sha512-YwHphBXhgVKmwyEkNAqiBrYI+WLrxI9ZOQfGtoZjJHfDC3/SjwACSFeWdk0Sg7EHVcMAC5pppGPhJ7UJO4xo4A==
 
+"@fontsource/roboto@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-4.5.1.tgz#63f7b783f755d8f6727eb60198627e7e1be3ac20"
+  integrity sha512-3mhfL+eNPG/woMNqwD/OHaW5qMpeGEBsDwzmhFmjB1yUV+M+M9P0NhP/AyHvnGz3DrqkvZ7CPzNMa+UkVLeELg==
+
 "@gar/promisify@^1.0.1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
@@ -3427,7 +3432,7 @@ babel-plugin-polyfill-regenerator@^0.2.3:
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.2.4"
 
-"babel-plugin-styled-components@>= 1.12.0", babel-plugin-styled-components@^1.13.3:
+"babel-plugin-styled-components@>= 1.12.0":
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.13.3.tgz#1f1cb3927d4afa1e324695c78f690900e3d075bc"
   integrity sha512-meGStRGv+VuKA/q0/jXxrPNWEm4LPfYIqxooDTdmh8kFsP/Ph7jJG5rUPwUPX3QHUvggwdbgdGpo88P/rRYsVw==

@@ -4,7 +4,7 @@ import themeClair from '../Shared/GlobalTheme/clair';
 import themeSombre from '../Shared/GlobalTheme/sombre';
 
 const useModeSombre = (): [DefaultTheme, () => void] => {
-  const [theme, setTheme] = useState<DefaultTheme>(themeClair);
+  const [theme, setTheme] = useState<DefaultTheme>(themeSombre);
 
   const changeMode = () => {
     setTheme((oldTheme) =>

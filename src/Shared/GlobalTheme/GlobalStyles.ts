@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import '@fontsource/oswald/latin.css';
+import '@fontsource/roboto/latin.css';
 
 const GlobalStyles = createGlobalStyle`
   html,body,#root {
@@ -10,11 +11,11 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${({ theme }) => theme.body.normal};
     color: ${({ theme }) => theme.text.normal};
     transition: background-color 500ms, color 500ms, border-color 500ms;
-    font-family: "Oswald";
+    font-family: "Roboto";
     font-size: 16px;
 
     input {
-    font-family: "Oswald";
+    font-family: "Roboto";
     }
   }`;
 
