@@ -10,8 +10,8 @@ let tempOpe: Operateur = null;
 let result = 0;
 
 const reset = () => {
-  tempNum1 = NaN;
-  tempNum2 = NaN;
+  tempNum1 = null;
+  tempNum2 = null;
   tempOpe = null;
 };
 
@@ -23,7 +23,6 @@ const Calculette = () => {
     tempOpe = op;
     tempNum1 = result;
   };
-
   const egal = (op: string) => {
     if (op === '=') {
       setVal(calcul(tempNum1, tempNum2, tempOpe) || 0);
