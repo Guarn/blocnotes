@@ -103,3 +103,23 @@ const checkFrenchChar = (val: string) => {
 };
 
 export default checkString;
+
+// type Operateur = '*' | '/' | '+' | '-';
+// type Chiffre = string;
+
+// type CharTypeReturn =
+//   | { type: 'operateur'; val: Operateur }
+//   | { type: 'chiffre'; val: Chiffre };
+
+// export const getCharType = (val: string): CharTypeReturn | null => {
+//   const operateurReg = /^[/*\-+]$/;
+//   const chiffreReg = /^[0-9]*$|[0-9]{1,}[,.]{1}[0-9]{1,}$/;
+
+//   if (operateurReg.test(val)) {
+//     return { type: 'operateur', val: val as Operateur };
+//   }
+//   if (chiffreReg.test(val)) {
+//     return { type: 'chiffre', val: val as Chiffre };
+//   }
+//   return null;
+// };

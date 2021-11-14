@@ -8,4 +8,5 @@ export const EntetePageGlobal = styled.span`
   transition: color 0.2s;
   letter-spacing: -5px;
   user-select: none;
+  text-transform: uppercase;
 `;
