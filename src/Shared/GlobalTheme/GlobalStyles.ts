@@ -17,6 +17,10 @@ const GlobalStyles = createGlobalStyle`
     input {
     font-family: "Roboto";
     }
+
+    a {
+      text-decoration:none;
+    }
   }`;
 
 export default GlobalStyles;

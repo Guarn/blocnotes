@@ -3,10 +3,10 @@ import { DefaultTheme } from 'styled-components';
 const themeSombre: DefaultTheme = {
   body: {
     normal: '#3A3C41',
-    assombri: '',
+    assombri: '#3E3E3E',
     pale: '#313131',
   },
-  border: { normal: '', assombri: '', pale: '#575757' },
+  border: { normal: '', assombri: '#2F2F2F', pale: '#575757' },
   text: {
     normal: '#F2F2F2',
     pale: '#676767',

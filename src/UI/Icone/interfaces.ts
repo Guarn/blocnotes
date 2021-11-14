@@ -8,6 +8,7 @@ export enum TailleIcone {
   'grand' = '18px',
   'large' = '25px',
   'extralarge' = '40px',
+  'extraextralarge' = '80px',
 }
 
 export interface IIcone {

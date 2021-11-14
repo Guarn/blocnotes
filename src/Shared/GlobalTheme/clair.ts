@@ -3,10 +3,10 @@ import { DefaultTheme } from 'styled-components';
 const themeClair: DefaultTheme = {
   body: {
     normal: '#F2F2F2',
-    assombri: '',
+    assombri: '#EAEAEA',
     pale: 'white',
   },
-  border: { normal: '', assombri: '', pale: '#c6c6c6' },
+  border: { normal: '', assombri: '#D7D7D7', pale: '#c6c6c6' },
   text: {
     normal: '#3A3C41',
     pale: '#BCBCBC',

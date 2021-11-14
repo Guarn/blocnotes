@@ -1,24 +1,34 @@
-import { useState } from 'react';
-import Input from '../../UI/Input/Input';
 import * as S from './Accueil.styled';
+import BlocLien from './BlocLien';
 
-const Accueil = () => {
-  const [inputValue, setInputValue] = useState<string>('');
-
-  return (
-    <S.AccueilGlobal>
-      <S.Titre>BLOC NOTES</S.Titre>
-      <Input
-        valeur={inputValue}
-        setValeur={setInputValue}
-        placeholder="Ajouter une note"
-        options={{ min: 3, specialChar: false, frenchChar: false, max: 6 }}
+const Accueil = () => (
+  <S.AccueilGlobal>
+    <S.ActifCtn>
+      <BlocLien
+        couleur="#B57676"
+        icone="BlocNotes"
+        titre="BLOC NOTES"
+        lien="/bloc-notes"
       />
-      <T />
-    </S.AccueilGlobal>
-  );
-};
-
-const T = () => <div>TEST</div>;
+      <BlocLien
+        couleur="#7693B5"
+        icone="Calculette"
+        titre="CALCULETTE"
+        lien="/calculette"
+      />
+      <BlocLien
+        couleur="#77B576"
+        icone="Messages"
+        titre="MESSAGES"
+        lien="/messages"
+      />
+    </S.ActifCtn>
+    <S.ActifCtn>
+      <BlocLien />
+      <BlocLien />
+      <BlocLien />
+    </S.ActifCtn>
+  </S.AccueilGlobal>
+);
 
 export default Accueil;
