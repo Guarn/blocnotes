@@ -17,7 +17,7 @@ export const BlocLienGlobal = styled(Link)<BlocLienGlobalProps>`
   background-color: ${({ theme }) => theme.body.assombri};
   border: 1px solid ${({ theme }) => theme.border.assombri};
   transition: background-color 500ms, color 500ms, border-color 500ms,
-    transform 200ms, box-shadow 200ms;
+    transform 200ms, box-shadow 200ms, z-index 200ms;
   transform: scale(1);
   opacity: ${({ actif }) => (actif ? 1 : 0.4)};
   cursor: ${({ actif }) => (actif ? 'pointer' : 'not-allowed')};
