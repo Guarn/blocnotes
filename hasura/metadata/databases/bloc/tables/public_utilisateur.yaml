@@ -1,0 +1,22 @@
+table:
+  name: utilisateur
+  schema: public
+configuration:
+  custom_column_names:
+    pseudo: pseudonyme
+  custom_root_fields: {}
+array_relationships:
+- name: messages
+  using:
+    foreign_key_constraint_on:
+      column: id_utilisateur
+      table:
+        name: messages
+        schema: public
+- name: notes
+  using:
+    foreign_key_constraint_on:
+      column: id_utilisateur
+      table:
+        name: notes
+        schema: public
