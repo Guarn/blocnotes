@@ -18,8 +18,8 @@ const LienAccueil = ({ theme }: LienAccueilProps) => (
       options={{
         zoom: { initial: 1, onHover: 1.2 },
         rotation: {
-          initial: theme === themeClair ? 0 : 180,
-          onHover: theme === themeClair ? 0 : 180,
+          initial: theme === themeClair ? 180 : 0,
+          onHover: theme === themeClair ? 180 : 0,
         },
         isAnimated: true,
         animationDuration: 0.2,

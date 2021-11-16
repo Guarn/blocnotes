@@ -37,4 +37,6 @@ rules:
     'no-unused-vars': 'off',
     'object-curly-newline': 'off',
     'operator-linebreak': 'off',
+    'react/jsx-curly-newline': 'off',
+    'react/no-array-index-key': 'off',
   }

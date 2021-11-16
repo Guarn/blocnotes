@@ -2,6 +2,13 @@
 ##### Queries utilisateurs #####
 ################################
 
+query GetUsers {
+  utilisateur {
+    id
+    pseudonyme
+  }
+}
+
 query GetUsersWithNotes {
   utilisateur {
     id
@@ -75,6 +82,15 @@ mutation DeleteUserByPK($id: Int!) {
 
 mutation DeleteUserByName($pseudo: String!) {
   delete_utilisateur(where: { pseudonyme: { _ilike: $pseudo } }) {
+    affected_rows
+  }
+}
+
+mutation UpdateUserPseudo($userId: Int!, $pseudo: String!) {
+  update_utilisateur(
+    where: { id: { _eq: $userId } }
+    _set: { pseudonyme: $pseudo }
+  ) {
     affected_rows
   }
 }

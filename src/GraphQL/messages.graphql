@@ -1,0 +1,31 @@
+################################
+##### Queries messages #####
+################################
+
+query GetMessages {
+  messages {
+    contenu
+    updated_at
+    utilisateur {
+      id
+      pseudonyme
+    }
+    id
+  }
+}
+
+################################
+#### Mutations messages ####
+################################
+
+mutation AddMessage($message: String!, $userId: Int!) {
+  insert_messages_one(object: { contenu: $message, id_utilisateur: $userId }) {
+    id
+  }
+}
+
+mutation DeleteMessage($messageId: Int!) {
+  delete_messages(where: { id: { _eq: $messageId } }) {
+    affected_rows
+  }
+}

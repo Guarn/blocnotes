@@ -11,7 +11,7 @@ export const InputGlobal = styled.div`
 InputGlobal.displayName = 'InputGlobal';
 
 export const ChampInputCtn = styled.div`
-  width: 40%;
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,6 @@ export const ChampInput = styled.input`
   padding: 8px 15px;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.border.pale};
-  transition: box-shadow 0.2s;
   background-color: ${({ theme }) => theme.body.pale};
   color: ${({ theme }) => theme.text.color1};
   &:focus {

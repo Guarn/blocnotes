@@ -29,7 +29,7 @@ export const BlocLienGlobal = styled(Link)<BlocLienGlobalProps>`
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   &:hover {
     transform: ${({ actif }) => (actif ? 'scale(1.1)' : 'scale(1)')};
-    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.4);
     z-index: 9999;
   }
 `;
