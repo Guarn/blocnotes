@@ -1334,6 +1334,11 @@ export type DeleteMessageMutationVariables = Exact<{
 
 export type DeleteMessageMutation = { __typename?: 'mutation_root', delete_messages?: { __typename?: 'messages_mutation_response', affected_rows: number } | null | undefined };
 
+export type GetMessagesSubSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMessagesSubSubscription = { __typename?: 'subscription_root', messages: Array<{ __typename?: 'messages', id: number, contenu: string, updated_at: any, utilisateur: { __typename?: 'utilisateur', id: number, pseudonyme: string } }> };
+
 export type GetNotesWithUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1412,6 +1417,11 @@ export type UpdateUserPseudoMutationVariables = Exact<{
 
 
 export type UpdateUserPseudoMutation = { __typename?: 'mutation_root', update_utilisateur?: { __typename?: 'utilisateur_mutation_response', affected_rows: number } | null | undefined };
+
+export type GetUsersSubSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUsersSubSubscription = { __typename?: 'subscription_root', utilisateur: Array<{ __typename?: 'utilisateur', id: number, pseudonyme: string }> };
 
 
 export const GetMessagesDocument = gql`
@@ -1521,6 +1531,41 @@ export function useDeleteMessageMutation(baseOptions?: Apollo.MutationHookOption
 export type DeleteMessageMutationHookResult = ReturnType<typeof useDeleteMessageMutation>;
 export type DeleteMessageMutationResult = Apollo.MutationResult<DeleteMessageMutation>;
 export type DeleteMessageMutationOptions = Apollo.BaseMutationOptions<DeleteMessageMutation, DeleteMessageMutationVariables>;
+export const GetMessagesSubDocument = gql`
+    subscription GetMessagesSub {
+  messages(order_by: {updated_at: asc}) {
+    id
+    contenu
+    updated_at
+    utilisateur {
+      id
+      pseudonyme
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetMessagesSubSubscription__
+ *
+ * To run a query within a React component, call `useGetMessagesSubSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetMessagesSubSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMessagesSubSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMessagesSubSubscription(baseOptions?: Apollo.SubscriptionHookOptions<GetMessagesSubSubscription, GetMessagesSubSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<GetMessagesSubSubscription, GetMessagesSubSubscriptionVariables>(GetMessagesSubDocument, options);
+      }
+export type GetMessagesSubSubscriptionHookResult = ReturnType<typeof useGetMessagesSubSubscription>;
+export type GetMessagesSubSubscriptionResult = Apollo.SubscriptionResult<GetMessagesSubSubscription>;
 export const GetNotesWithUserDocument = gql`
     query GetNotesWithUser {
   notes {
@@ -1971,6 +2016,36 @@ export function useUpdateUserPseudoMutation(baseOptions?: Apollo.MutationHookOpt
 export type UpdateUserPseudoMutationHookResult = ReturnType<typeof useUpdateUserPseudoMutation>;
 export type UpdateUserPseudoMutationResult = Apollo.MutationResult<UpdateUserPseudoMutation>;
 export type UpdateUserPseudoMutationOptions = Apollo.BaseMutationOptions<UpdateUserPseudoMutation, UpdateUserPseudoMutationVariables>;
+export const GetUsersSubDocument = gql`
+    subscription GetUsersSub {
+  utilisateur {
+    id
+    pseudonyme
+  }
+}
+    `;
+
+/**
+ * __useGetUsersSubSubscription__
+ *
+ * To run a query within a React component, call `useGetUsersSubSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetUsersSubSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUsersSubSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUsersSubSubscription(baseOptions?: Apollo.SubscriptionHookOptions<GetUsersSubSubscription, GetUsersSubSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<GetUsersSubSubscription, GetUsersSubSubscriptionVariables>(GetUsersSubDocument, options);
+      }
+export type GetUsersSubSubscriptionHookResult = ReturnType<typeof useGetUsersSubSubscription>;
+export type GetUsersSubSubscriptionResult = Apollo.SubscriptionResult<GetUsersSubSubscription>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {
