@@ -94,3 +94,10 @@ mutation UpdateUserPseudo($userId: Int!, $pseudo: String!) {
     affected_rows
   }
 }
+
+subscription GetUsersSub {
+  utilisateur {
+    id
+    pseudonyme
+  }
+}

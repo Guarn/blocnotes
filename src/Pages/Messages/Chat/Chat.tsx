@@ -5,8 +5,7 @@ import 'moment/locale/fr';
 import { useEffect, useRef, useState } from 'react';
 import {
   useAddMessageMutation,
-  useDeleteMessageMutation,
-  useGetMessagesQuery,
+  useGetMessagesSubSubscription,
 } from '../../../generated/graphql';
 import * as S from './Chat.styled';
 import Message from './Message';
@@ -17,8 +16,7 @@ interface ChatProps {
 const Chat = ({ userId }: ChatProps) => {
   const [inputValue, setInputValue] = useState('');
   const [addMessage] = useAddMessageMutation();
-  const [deleteMessage] = useDeleteMessageMutation();
-  const { data } = useGetMessagesQuery({ pollInterval: 100 });
+  const { data } = useGetMessagesSubSubscription();
   const messagesListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

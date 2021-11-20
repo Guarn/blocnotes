@@ -29,3 +29,19 @@ mutation DeleteMessage($messageId: Int!) {
     affected_rows
   }
 }
+
+################################
+#### Subscriptions messages ####
+################################
+
+subscription GetMessagesSub {
+  messages(order_by: { updated_at: asc }) {
+    id
+    contenu
+    updated_at
+    utilisateur {
+      id
+      pseudonyme
+    }
+  }
+}

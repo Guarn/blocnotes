@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
   useAddUserMutation,
-  useGetUsersQuery,
+  useGetUsersSubSubscription,
   useUpdateUserPseudoMutation,
 } from '../../../generated/graphql';
 import * as S from './Utilisateurs.styled';
@@ -11,7 +11,7 @@ interface UtilisateursProps {
   setUserId: (val: number) => void;
 }
 const Utilisateurs = ({ userId, setUserId }: UtilisateursProps) => {
-  const { data } = useGetUsersQuery({ pollInterval: 100 });
+  const { data } = useGetUsersSubSubscription();
   const [addUtilisateur] = useAddUserMutation();
   const [isEditing, setIsEditing] = useState<number | null>(null);
   const [updateUserPseudo] = useUpdateUserPseudoMutation();
