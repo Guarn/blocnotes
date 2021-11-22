@@ -1,6 +1,11 @@
-actions: []
+actions:
+- name: auth0
+  definition:
+    kind: ""
+    handler: http://192.168.0.249:8081/test
 custom_types:
   enums: []
   input_objects: []
-  objects: []
+  objects:
+  - name: auth0_profile
   scalars: []
