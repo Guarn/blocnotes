@@ -5,6 +5,8 @@ const themeSombre: DefaultTheme = {
     normal: '#3A3C41',
     assombri: '#3E3E3E',
     pale: '#313131',
+    builder_menu: '#455563',
+    builder_elements: '#474747',
   },
   border: { normal: '', assombri: '#2F2F2F', pale: '#575757' },
   text: {
@@ -20,10 +22,10 @@ const themeSombre: DefaultTheme = {
   shadow: {
     transparent_clair_005: '',
     transparent_clair_01: '',
-    transparent_clair_02: '',
+    transparent_clair_02: 'rgba(255,255,255,0.2)',
     transparent_sombre_005: '',
     transparent_sombre_01: '',
-    transparent_sombre_02: '',
+    transparent_sombre_02: 'rgba(0,0,0,0.2)',
   },
 };
 

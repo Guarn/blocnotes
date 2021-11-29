@@ -2,6 +2,8 @@ export interface BodyColors {
   normal: string;
   assombri: string;
   pale: string;
+  builder_menu: string;
+  builder_elements: string;
 }
 
 export interface BorderColors {

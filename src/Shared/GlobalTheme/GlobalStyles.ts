@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle<{ transition: boolean }>`
     margin: 0;
     height:100%;
     width:100%;
+    overflow: hidden;
     background-color: ${({ theme }) => theme.body.normal};
     color: ${({ theme }) => theme.text.normal};
     transition: ${({ transition }) =>
