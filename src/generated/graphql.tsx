@@ -74,11 +74,9 @@ export type String_Comparison_Exp = {
   _similar?: Maybe<Scalars['String']>;
 };
 
-export type Auth0_Profile = {
-  __typename?: 'auth0_profile';
-  email?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
-  picture?: Maybe<Scalars['String']>;
+export type Login_Token_Jwt = {
+  __typename?: 'login_token_jwt';
+  token: Scalars['String'];
 };
 
 /** columns and relationships of "messages" */
@@ -880,7 +878,7 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
-  auth0?: Maybe<Auth0_Profile>;
+  login?: Maybe<Login_Token_Jwt>;
   /** fetch data from the table: "messages" */
   messages: Array<Messages>;
   /** An aggregate relationship */
@@ -899,6 +897,11 @@ export type Query_Root = {
   utilisateur_aggregate: Utilisateur_Aggregate;
   /** fetch data from the table: "utilisateur" using primary key columns */
   utilisateur_by_pk?: Maybe<Utilisateur>;
+};
+
+
+export type Query_RootLoginArgs = {
+  user: Scalars['String'];
 };
 
 
@@ -1322,10 +1325,12 @@ export type Utilisateur_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-export type TestQueryVariables = Exact<{ [key: string]: never; }>;
+export type TestQueryVariables = Exact<{
+  user: Scalars['String'];
+}>;
 
 
-export type TestQuery = { __typename?: 'query_root', auth0?: { __typename?: 'auth0_profile', email?: string | null | undefined } | null | undefined };
+export type TestQuery = { __typename?: 'query_root', login?: { __typename?: 'login_token_jwt', token: string } | null | undefined };
 
 export type GetMessagesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1438,9 +1443,9 @@ export type GetUsersSubSubscription = { __typename?: 'subscription_root', utilis
 
 
 export const TestDocument = gql`
-    query test {
-  auth0 {
-    email
+    query test($user: String!) {
+  login(user: $user) {
+    token
   }
 }
     `;
@@ -1457,10 +1462,11 @@ export const TestDocument = gql`
  * @example
  * const { data, loading, error } = useTestQuery({
  *   variables: {
+ *      user: // value for 'user'
  *   },
  * });
  */
-export function useTestQuery(baseOptions?: Apollo.QueryHookOptions<TestQuery, TestQueryVariables>) {
+export function useTestQuery(baseOptions: Apollo.QueryHookOptions<TestQuery, TestQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<TestQuery, TestQueryVariables>(TestDocument, options);
       }

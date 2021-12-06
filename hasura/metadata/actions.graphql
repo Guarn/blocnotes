@@ -1,10 +1,10 @@
 type Query {
-  auth0: auth0_profile
+  login(
+    user: String!
+  ): login_token_jwt
 }
 
-type auth0_profile {
-  id: String
-  email: String
-  picture: String
+type login_token_jwt {
+  token: String!
 }
 

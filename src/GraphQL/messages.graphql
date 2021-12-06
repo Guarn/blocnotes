@@ -2,9 +2,9 @@
 ##### Queries messages #####
 ################################
 
-query test {
-  auth0 {
-    email
+query test($user: String!) {
+  login(user: $user) {
+    token
   }
 }
 

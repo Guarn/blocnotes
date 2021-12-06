@@ -12,9 +12,10 @@ interface UtilisateursProps {
 }
 const Utilisateurs = ({ userId, setUserId }: UtilisateursProps) => {
   const { data } = useGetUsersSubSubscription();
-  const [addUtilisateur] = useAddUserMutation();
+  const [addUtilisateur] = useAddUserMutation({ errorPolicy: 'ignore' });
   const [isEditing, setIsEditing] = useState<number | null>(null);
   const [updateUserPseudo] = useUpdateUserPseudoMutation();
+
   return (
     <S.UtilisateursGlobal>
       <S.UtilisateursCtn>

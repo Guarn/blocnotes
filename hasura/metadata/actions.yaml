@@ -1,11 +1,14 @@
 actions:
-- name: auth0
+- name: login
   definition:
     kind: ""
     handler: http://192.168.0.249:8081/test
+  permissions:
+  - role: authorized
+  - role: public
 custom_types:
   enums: []
   input_objects: []
   objects:
-  - name: auth0_profile
+  - name: login_token_jwt
   scalars: []

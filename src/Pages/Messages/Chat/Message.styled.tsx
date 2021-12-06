@@ -33,6 +33,7 @@ export const MessageGlobal = styled.div<{ leftSide: boolean }>`
 export const InfosCtn = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 8px;
 `;
 
 export const UtilisateurCtn = styled.div`
@@ -54,7 +55,7 @@ export const NomUtilisateur = styled.span`
 
 export const Updated = styled.span`
   font-family: 'Urbanist';
-  opacity: 0.5;
+  opacity: 0.7;
   font-weight: 200;
 `;
 

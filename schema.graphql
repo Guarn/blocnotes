@@ -130,10 +130,8 @@ input String_comparison_exp {
   _similar: String
 }
 
-type auth0_profile {
-  email: String
-  id: String
-  picture: String
+type login_token_jwt {
+  token: String!
 }
 
 """
@@ -1034,7 +1032,7 @@ enum order_by {
 }
 
 type query_root {
-  auth0: auth0_profile
+  login(user: String!): login_token_jwt
 
   """
   fetch data from the table: "messages"

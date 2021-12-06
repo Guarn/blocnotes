@@ -4,10 +4,11 @@ import * as S from './Accueil.styled';
 import BlocLien from './BlocLien';
 
 const Accueil = () => {
-  const { data } = useTestQuery();
+  const { data, error } = useTestQuery({ variables: { user: 'flo' } });
   useEffect(() => {
     document.title = 'Accueil';
-  }, []);
+    if (error) console.log(data, error);
+  });
   return (
     <S.AccueilGlobal>
       <S.ActifCtn>
@@ -35,7 +36,7 @@ const Accueil = () => {
         <BlocLien />
         <BlocLien />
       </S.ActifCtn>
-      {data?.auth0?.email}
+      {data && data.login?.token}
     </S.AccueilGlobal>
   );
 };

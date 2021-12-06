@@ -7,16 +7,12 @@ object_relationships:
     foreign_key_constraint_on: id_utilisateur
 select_permissions:
 - permission:
-    columns: []
+    columns:
+    - id
+    - contenu
+    - created_at
+    - updated_at
+    - active
+    - id_utilisateur
     filter: {}
-  role: test
-update_permissions:
-- permission:
-    check: null
-    columns: []
-    filter: {}
-  role: test
-delete_permissions:
-- permission:
-    filter: {}
-  role: test
+  role: authorized

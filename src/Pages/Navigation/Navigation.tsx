@@ -1,18 +1,20 @@
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Accueil from '../Accueil/Accueil';
 import BlocNotes from '../BlocNotes/BlocNotes';
-import Builder from '../Builder/Builder';
 import Calculette from '../Calculette/Calculette';
-import Messages from '../Messages/Messages';
+
+const Messages = React.lazy(() => import('../Messages/Messages'));
 
 const Navigation = () => (
-  <Routes>
-    <Route path="/" element={<Accueil />} />
-    <Route path="/bloc-notes" element={<BlocNotes />} />
-    <Route path="/calculette" element={<Calculette />} />
-    <Route path="/messages" element={<Messages />} />
-    <Route path="/builder" element={<Builder />} />
-  </Routes>
+  <Suspense fallback={<div>test</div>}>
+    <Routes>
+      <Route path="/" element={<Accueil />} />
+      <Route path="/bloc-notes" element={<BlocNotes />} />
+      <Route path="/calculette" element={<Calculette />} />
+      <Route path="/messages" element={<Messages />} />
+    </Routes>
+  </Suspense>
 );
 
 export default Navigation;

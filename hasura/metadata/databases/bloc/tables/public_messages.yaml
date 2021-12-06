@@ -5,3 +5,12 @@ object_relationships:
 - name: utilisateur
   using:
     foreign_key_constraint_on: id_utilisateur
+select_permissions:
+- permission:
+    columns:
+    - id
+    - id_utilisateur
+    - contenu
+    - updated_at
+    filter: {}
+  role: authorized

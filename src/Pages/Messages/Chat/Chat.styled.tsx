@@ -11,11 +11,11 @@ export const ChatGlobal = styled.div`
   border: 2px solid ${({ theme }) => theme.border.assombri};
   border-radius: 17px;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
-  ${Transition}
-  display:flex;
+  display: flex;
   flex-direction: column;
   box-sizing: border-box;
   padding: 5px;
+  transition: background-color 500ms, border-color 500ms;
 `;
 
 export const MessagesCtn = styled.div`

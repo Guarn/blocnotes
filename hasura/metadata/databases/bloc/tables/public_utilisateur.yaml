@@ -20,3 +20,11 @@ array_relationships:
       table:
         name: notes
         schema: public
+select_permissions:
+- permission:
+    columns:
+    - pseudo
+    - id
+    - created_at
+    filter: {}
+  role: authorized
