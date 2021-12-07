@@ -1,46 +1,67 @@
-import { split, HttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
+import { setContext } from '@apollo/client/link/context';
+import { getRecoil } from 'recoil-nexus';
+import jwt_token from '../../State/Token';
 
-export const headers = {
-  Authorization:
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZmxvIiwiY2xhaW1zIjp7IngtaGFzdXJhLXJvbGUiOiJhdXRob3JpemVkIiwieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJhdXRob3JpemVkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImF1dGhvcml6ZWQifSwiaWF0IjoxNjM4NzY4Nzk2LCJleHAiOjE2Mzg4NTUxOTZ9.DZHgQ3oafcUJBPbWAseor0u6s2VyflPOIKdQxWGXAyQ',
-};
-const httpLink = new HttpLink({
-  uri: 'http://localhost:8080/v1/graphql',
-  headers,
-});
+function link() {
+  const httpLink = new HttpLink({
+    uri: 'http://localhost:8080/v1/graphql',
+  });
+  const httpAuthLink = setContext(() => {
+    const token = getRecoil(jwt_token);
+    if (token.length > 0) {
+      return {
+        headers: {
+          Authorization: token,
+        },
+      };
+    }
+    return {};
+  });
 
-const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:8080/v1/graphql',
-  options: {
-    reconnect: true,
-    connectionParams: {
-      headers,
+  const wsLink = new WebSocketLink({
+    uri: 'ws://localhost:8080/v1/graphql',
+    options: {
+      lazy: true,
+      reconnect: true,
+      connectionParams: () => {
+        const token = getRecoil(jwt_token);
+        if (token) {
+          return {
+            headers: {
+              Authorization: token,
+            },
+          };
+        }
+        return {
+          headers: {},
+        };
+      },
     },
-  },
-});
+  });
 
-// The split function takes three parameters:
-//
-// * A function that's called for each operation to execute
-// * The Link to use for an operation if the function returns a "truthy" value
-// * The Link to use for an operation if the function returns a "falsy" value
-const splitLink = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query);
-    return (
-      definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription'
-    );
-  },
-  wsLink,
-  httpLink
-);
+  return split(
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      return (
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
+      );
+    },
+    wsLink,
+    httpAuthLink.concat(httpLink)
+  );
+}
 
-const client = new ApolloClient({
-  link: splitLink,
+const clientAuth = new ApolloClient({
+  link: link(),
   cache: new InMemoryCache(),
 });
 
-export default client;
+clientAuth.onResetStore(async () => {
+  clientAuth.setLink(link());
+});
+
+export default clientAuth;

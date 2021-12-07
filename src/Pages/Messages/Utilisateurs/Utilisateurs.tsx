@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   useAddUserMutation,
   useGetUsersSubSubscription,
@@ -11,11 +11,14 @@ interface UtilisateursProps {
   setUserId: (val: number) => void;
 }
 const Utilisateurs = ({ userId, setUserId }: UtilisateursProps) => {
-  const { data } = useGetUsersSubSubscription();
-  const [addUtilisateur] = useAddUserMutation({ errorPolicy: 'ignore' });
+  const { data, error } = useGetUsersSubSubscription();
+  const [addUtilisateur] = useAddUserMutation();
   const [isEditing, setIsEditing] = useState<number | null>(null);
   const [updateUserPseudo] = useUpdateUserPseudoMutation();
 
+  useEffect(() => {
+    console.log(data, error);
+  });
   return (
     <S.UtilisateursGlobal>
       <S.UtilisateursCtn>

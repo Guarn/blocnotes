@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
-import { useTestQuery } from '../../generated/graphql';
 import * as S from './Accueil.styled';
 import BlocLien from './BlocLien';
 
 const Accueil = () => {
-  const { data, error } = useTestQuery({ variables: { user: 'flo' } });
   useEffect(() => {
     document.title = 'Accueil';
-    if (error) console.log(data, error);
   });
   return (
     <S.AccueilGlobal>
@@ -36,7 +33,6 @@ const Accueil = () => {
         <BlocLien />
         <BlocLien />
       </S.ActifCtn>
-      {data && data.login?.token}
     </S.AccueilGlobal>
   );
 };
