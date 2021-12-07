@@ -26,6 +26,7 @@ function link() {
     options: {
       lazy: true,
       reconnect: true,
+      inactivityTimeout: 1000,
       connectionParams: () => {
         const token = getRecoil(jwt_token);
         if (token) {
