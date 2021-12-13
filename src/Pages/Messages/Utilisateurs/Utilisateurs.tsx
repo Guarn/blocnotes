@@ -16,23 +16,11 @@ interface UtilisateursProps {
 }
 const Utilisateurs = ({ userId, setUserId }: UtilisateursProps) => {
   const token = useRecoilValue(jwt_token);
-  const [o, oo] = useState(true);
-  const { data, error } = useGetUsersSubSubscription({
-    shouldResubscribe: (e) => {
-      console.log(e);
-      return true;
-    },
-  });
+  const { data, error } = useGetUsersSubSubscription();
   const [addUtilisateur] = useAddUserMutation();
   const [isEditing, setIsEditing] = useState<number | null>(null);
   const [updateUserPseudo] = useUpdateUserPseudoMutation();
 
-  useEffect(() => {
-    console.log(data, error, token);
-    if (data) {
-      oo(false);
-    }
-  });
   return (
     <S.UtilisateursGlobal>
       <S.UtilisateursCtn>

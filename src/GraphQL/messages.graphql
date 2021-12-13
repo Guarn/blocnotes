@@ -5,6 +5,7 @@
 query test($user: String!) {
   login(user: $user) {
     token
+    expiresIn
   }
 }
 

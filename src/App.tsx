@@ -9,7 +9,7 @@ import Navigation from './Pages/Navigation/Navigation';
 import GlobalStyles from './Shared/GlobalTheme/GlobalStyles';
 import LienAccueil from './UI/LienAccueil/LienAccueil';
 import SwitchMode from './UI/SwitchMode/SwitchMode';
-import clientAuth from './Shared/Apollo/client';
+import client from './Shared/Apollo/client';
 
 const App = () => {
   const [theme, changeMode] = useModeSombre();
@@ -21,7 +21,7 @@ const App = () => {
   }, []);
 
   return (
-    <ApolloProvider client={clientAuth}>
+    <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
         <RecoilRoot>
           <RecoilNexus />

@@ -6,5 +6,6 @@ type Query {
 
 type login_token_jwt {
   token: String!
+  expiresIn: Int!
 }
 

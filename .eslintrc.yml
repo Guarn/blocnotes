@@ -43,4 +43,5 @@ rules:
     'no-param-reassign': 'off',
     'import/no-mutable-exports': 'off',
     '@typescript-eslint/no-empty-function': 'off',
+    'import/no-extraneous-dependencies': 'off',
   }

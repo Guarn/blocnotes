@@ -76,6 +76,7 @@ export type String_Comparison_Exp = {
 
 export type Login_Token_Jwt = {
   __typename?: 'login_token_jwt';
+  expiresIn: Scalars['Int'];
   token: Scalars['String'];
 };
 
@@ -1330,7 +1331,7 @@ export type TestQueryVariables = Exact<{
 }>;
 
 
-export type TestQuery = { __typename?: 'query_root', login?: { __typename?: 'login_token_jwt', token: string } | null | undefined };
+export type TestQuery = { __typename?: 'query_root', login?: { __typename?: 'login_token_jwt', token: string, expiresIn: number } | null | undefined };
 
 export type GetMessagesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1446,6 +1447,7 @@ export const TestDocument = gql`
     query test($user: String!) {
   login(user: $user) {
     token
+    expiresIn
   }
 }
     `;

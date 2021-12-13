@@ -131,6 +131,7 @@ input String_comparison_exp {
 }
 
 type login_token_jwt {
+  expiresIn: Int!
   token: String!
 }
 

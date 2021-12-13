@@ -2,7 +2,7 @@ actions:
 - name: login
   definition:
     kind: ""
-    handler: http://192.168.0.249:8081/test
+    handler: http://192.168.0.249:5000/test
   permissions:
   - role: authorized
   - role: public
