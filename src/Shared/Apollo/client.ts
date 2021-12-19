@@ -9,11 +9,7 @@ import {
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { setContext } from '@apollo/client/link/context';
-import { RetryLink } from '@apollo/client/link/retry';
 import { onError } from '@apollo/client/link/error';
-import { getRecoil } from 'recoil-nexus';
-import jwt_token from '../../State/Token';
-import token from './token';
 
 const getRefreshToken = async () => {
   const response = await axios({
@@ -21,23 +17,14 @@ const getRefreshToken = async () => {
     data: { user: 'Bernard' },
     url: 'http://localhost:5000/test',
   });
-  token.value = response.data.token;
   return response;
 };
-
-const linkT = new RetryLink({
-  attempts: (count, operation, error) => {
-    console.log(error);
-
-    return !!error && operation.operationName !== 'specialCase';
-  },
-  delay: (count, operation, error) => count * 1000 * Math.random(),
-});
 
 const errorLink = onError(
   ({ graphQLErrors, networkError, operation, forward }) => {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) =>
+        // eslint-disable-next-line no-console
         console.log(
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
         )
@@ -45,6 +32,7 @@ const errorLink = onError(
     }
 
     if (networkError) {
+      // eslint-disable-next-line no-console
       console.log(`[Network error]: ${networkError.message}`);
     }
     return forward(operation);
@@ -60,7 +48,7 @@ function link() {
     if (token1.data.token) {
       return {
         headers: {
-          Authorization: token1.data.token,
+          Authorization: `Bearer ${token1.data.token}`,
         },
       };
     }
@@ -72,14 +60,12 @@ function link() {
     options: {
       lazy: true,
       reconnect: true,
-      inactivityTimeout: 1000,
       connectionParams: async () => {
         const token1 = await getRefreshToken();
-        console.log(token1);
         if (token1.data.token) {
           return {
             headers: {
-              Authorization: token1.data.token,
+              Authorization: `Bearer ${token1.data.token}`,
             },
           };
         }
@@ -99,7 +85,7 @@ function link() {
       );
     },
     from([errorLink, wsLink]),
-    httpAuthLink.concat(httpLink)
+    from([errorLink, httpAuthLink.concat(httpLink)])
   );
 }
 

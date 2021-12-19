@@ -1,13 +1,10 @@
-import { useApolloClient } from '@apollo/client';
-import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useState } from 'react';
 
 import {
   useAddUserMutation,
   useGetUsersSubSubscription,
   useUpdateUserPseudoMutation,
 } from '../../../generated/graphql';
-import jwt_token from '../../../State/Token';
 import * as S from './Utilisateurs.styled';
 
 interface UtilisateursProps {
@@ -15,8 +12,7 @@ interface UtilisateursProps {
   setUserId: (val: number) => void;
 }
 const Utilisateurs = ({ userId, setUserId }: UtilisateursProps) => {
-  const token = useRecoilValue(jwt_token);
-  const { data, error } = useGetUsersSubSubscription();
+  const { data } = useGetUsersSubSubscription();
   const [addUtilisateur] = useAddUserMutation();
   const [isEditing, setIsEditing] = useState<number | null>(null);
   const [updateUserPseudo] = useUpdateUserPseudoMutation();

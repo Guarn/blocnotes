@@ -15,7 +15,7 @@ interface ChatProps {
 }
 const Chat = ({ userId }: ChatProps) => {
   const [inputValue, setInputValue] = useState('');
-  const [addMessage] = useAddMessageMutation();
+  const [addMessage] = useAddMessageMutation({ errorPolicy: 'ignore' });
   const { data } = useGetMessagesSubSubscription();
   const messagesListRef = useRef<HTMLDivElement>(null);
 
