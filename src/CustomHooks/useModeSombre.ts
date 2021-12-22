@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { DefaultTheme } from 'styled-components';
+import { useGetUsersWithNotesQuery } from '../generated/graphql';
 import themeClair from '../Shared/GlobalTheme/clair';
 import themeSombre from '../Shared/GlobalTheme/sombre';
 
