@@ -27,15 +27,13 @@ const Navigation = () => {
   });
   return (
     <Routes>
-      {!token.token && (
-        <Route index={false} path="/Connexion" element={<Connexion />} />
-      )}
+      {!token.token && <Route path="*" element={<Connexion />} />}
       {token.token && (
         <>
           <Route path="/bloc-notes" element={<BlocNotes />} />
           <Route path="/calculette" element={<Calculette />} />
           <Route path="/messages" element={<Messages />} />
-          <Route path="/" element={<Accueil />} />
+          <Route path="*" element={<Accueil />} />
         </>
       )}
     </Routes>
