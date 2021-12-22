@@ -10,5 +10,6 @@ export const PageDefault = css`
 `;
 
 export const Transition = css`
-  transition: background-color 500ms, color 500ms, border-color 500ms;
+  transition: background-color 500ms, color 500ms, border-color 500ms,
+    box-shadow 500ms;
 `;

@@ -1381,6 +1381,7 @@ type utilisateur {
     """filter the rows returned"""
     where: notes_bool_exp
   ): notes_aggregate!
+  password: String
   pseudonyme: String!
 }
 
@@ -1425,6 +1426,7 @@ input utilisateur_bool_exp {
   id: Int_comparison_exp
   messages: messages_bool_exp
   notes: notes_bool_exp
+  password: String_comparison_exp
   pseudonyme: String_comparison_exp
 }
 
@@ -1454,6 +1456,7 @@ input utilisateur_insert_input {
   id: Int
   messages: messages_arr_rel_insert_input
   notes: notes_arr_rel_insert_input
+  password: String
   pseudonyme: String
 }
 
@@ -1461,6 +1464,7 @@ input utilisateur_insert_input {
 type utilisateur_max_fields {
   created_at: timestamptz
   id: Int
+  password: String
   pseudonyme: String
 }
 
@@ -1468,6 +1472,7 @@ type utilisateur_max_fields {
 type utilisateur_min_fields {
   created_at: timestamptz
   id: Int
+  password: String
   pseudonyme: String
 }
 
@@ -1507,6 +1512,7 @@ input utilisateur_order_by {
   id: order_by
   messages_aggregate: messages_aggregate_order_by
   notes_aggregate: notes_aggregate_order_by
+  password: order_by
   pseudonyme: order_by
 }
 
@@ -1526,6 +1532,9 @@ enum utilisateur_select_column {
   id
 
   """column name"""
+  password
+
+  """column name"""
   pseudonyme
 }
 
@@ -1535,6 +1544,7 @@ input type for updating data in table "utilisateur"
 input utilisateur_set_input {
   created_at: timestamptz
   id: Int
+  password: String
   pseudonyme: String
 }
 
@@ -1567,6 +1577,9 @@ enum utilisateur_update_column {
 
   """column name"""
   id
+
+  """column name"""
+  password
 
   """column name"""
   pseudonyme

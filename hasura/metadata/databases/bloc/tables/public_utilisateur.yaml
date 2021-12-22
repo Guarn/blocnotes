@@ -23,8 +23,17 @@ array_relationships:
 select_permissions:
 - permission:
     columns:
+    - created_at
+    - id
+    - password
+    - pseudo
+    filter: {}
+  role: authorized
+- permission:
+    columns:
+    - password
     - pseudo
     - id
     - created_at
     filter: {}
-  role: authorized
+  role: public

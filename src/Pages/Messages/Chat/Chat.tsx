@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { gql } from '@apollo/client';
 import moment from 'moment';
 import 'moment/locale/fr';
 import { useEffect, useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import {
   useAddMessageMutation,
-  useGetMessagesSubSubscription,
+  useGetMessagesQuery,
 } from '../../../generated/graphql';
+import jwt_token from '../../../State/Token';
 import * as S from './Chat.styled';
 import Message from './Message';
 
@@ -14,12 +17,17 @@ interface ChatProps {
   userId: number | null;
 }
 const Chat = ({ userId }: ChatProps) => {
+  const [value, setValue] = useRecoilState(jwt_token);
   const [inputValue, setInputValue] = useState('');
   const [addMessage] = useAddMessageMutation({ errorPolicy: 'ignore' });
-  const { data } = useGetMessagesSubSubscription();
+  const { data, error, subscribeToMore } = useGetMessagesQuery();
   const messagesListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (error && value.token) {
+      setValue({ token: '', expiresAt: null });
+    }
+
     if (messagesListRef && messagesListRef.current) {
       messagesListRef.current.scrollBy({
         behavior: 'smooth',
@@ -27,6 +35,38 @@ const Chat = ({ userId }: ChatProps) => {
       });
     }
   });
+
+  useEffect(() => {
+    subscribeToMore({
+      document: gql`
+        subscription GetMessagesSub {
+          messages(order_by: { updated_at: desc }, limit: 1) {
+            id
+            contenu
+            updated_at
+            utilisateur {
+              id
+              pseudonyme
+            }
+          }
+        }
+      `,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (
+          !subscriptionData.data ||
+          !prev.messages ||
+          prev.messages[prev.messages.length - 1].id ===
+            subscriptionData.data.messages[0].id
+        ) {
+          return prev;
+        }
+        return {
+          ...prev,
+          messages: [...prev.messages, subscriptionData.data.messages[0]],
+        };
+      },
+    });
+  }, []);
 
   return (
     <S.ChatGlobal>

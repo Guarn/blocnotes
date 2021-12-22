@@ -41,8 +41,8 @@ mutation DeleteMessage($messageId: Int!) {
 #### Subscriptions messages ####
 ################################
 
-subscription GetMessagesSub {
-  messages(order_by: { updated_at: asc }) {
+subscription GetMessagesSub2 {
+  messages(order_by: { updated_at: desc }, limit: 1) {
     id
     contenu
     updated_at

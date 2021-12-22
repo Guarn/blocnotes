@@ -1091,6 +1091,7 @@ export type Utilisateur = {
   notes: Array<Notes>;
   /** An aggregate relationship */
   notes_aggregate: Notes_Aggregate;
+  password?: Maybe<Scalars['String']>;
   pseudonyme: Scalars['String'];
 };
 
@@ -1179,6 +1180,7 @@ export type Utilisateur_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   messages?: Maybe<Messages_Bool_Exp>;
   notes?: Maybe<Notes_Bool_Exp>;
+  password?: Maybe<String_Comparison_Exp>;
   pseudonyme?: Maybe<String_Comparison_Exp>;
 };
 
@@ -1201,6 +1203,7 @@ export type Utilisateur_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   messages?: Maybe<Messages_Arr_Rel_Insert_Input>;
   notes?: Maybe<Notes_Arr_Rel_Insert_Input>;
+  password?: Maybe<Scalars['String']>;
   pseudonyme?: Maybe<Scalars['String']>;
 };
 
@@ -1209,6 +1212,7 @@ export type Utilisateur_Max_Fields = {
   __typename?: 'utilisateur_max_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  password?: Maybe<Scalars['String']>;
   pseudonyme?: Maybe<Scalars['String']>;
 };
 
@@ -1217,6 +1221,7 @@ export type Utilisateur_Min_Fields = {
   __typename?: 'utilisateur_min_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  password?: Maybe<Scalars['String']>;
   pseudonyme?: Maybe<Scalars['String']>;
 };
 
@@ -1249,6 +1254,7 @@ export type Utilisateur_Order_By = {
   id?: Maybe<Order_By>;
   messages_aggregate?: Maybe<Messages_Aggregate_Order_By>;
   notes_aggregate?: Maybe<Notes_Aggregate_Order_By>;
+  password?: Maybe<Order_By>;
   pseudonyme?: Maybe<Order_By>;
 };
 
@@ -1264,6 +1270,8 @@ export enum Utilisateur_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Password = 'password',
+  /** column name */
   Pseudonyme = 'pseudonyme'
 }
 
@@ -1271,6 +1279,7 @@ export enum Utilisateur_Select_Column {
 export type Utilisateur_Set_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  password?: Maybe<Scalars['String']>;
   pseudonyme?: Maybe<Scalars['String']>;
 };
 
@@ -1304,6 +1313,8 @@ export enum Utilisateur_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
+  /** column name */
+  Password = 'password',
   /** column name */
   Pseudonyme = 'pseudonyme'
 }
@@ -1353,10 +1364,10 @@ export type DeleteMessageMutationVariables = Exact<{
 
 export type DeleteMessageMutation = { __typename?: 'mutation_root', delete_messages?: { __typename?: 'messages_mutation_response', affected_rows: number } | null | undefined };
 
-export type GetMessagesSubSubscriptionVariables = Exact<{ [key: string]: never; }>;
+export type GetMessagesSub2SubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMessagesSubSubscription = { __typename?: 'subscription_root', messages: Array<{ __typename?: 'messages', id: number, contenu: string, updated_at: any, utilisateur: { __typename?: 'utilisateur', id: number, pseudonyme: string } }> };
+export type GetMessagesSub2Subscription = { __typename?: 'subscription_root', messages: Array<{ __typename?: 'messages', id: number, contenu: string, updated_at: any, utilisateur: { __typename?: 'utilisateur', id: number, pseudonyme: string } }> };
 
 export type GetNotesWithUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1586,9 +1597,9 @@ export function useDeleteMessageMutation(baseOptions?: Apollo.MutationHookOption
 export type DeleteMessageMutationHookResult = ReturnType<typeof useDeleteMessageMutation>;
 export type DeleteMessageMutationResult = Apollo.MutationResult<DeleteMessageMutation>;
 export type DeleteMessageMutationOptions = Apollo.BaseMutationOptions<DeleteMessageMutation, DeleteMessageMutationVariables>;
-export const GetMessagesSubDocument = gql`
-    subscription GetMessagesSub {
-  messages(order_by: {updated_at: asc}) {
+export const GetMessagesSub2Document = gql`
+    subscription GetMessagesSub2 {
+  messages(order_by: {updated_at: desc}, limit: 1) {
     id
     contenu
     updated_at
@@ -1601,26 +1612,26 @@ export const GetMessagesSubDocument = gql`
     `;
 
 /**
- * __useGetMessagesSubSubscription__
+ * __useGetMessagesSub2Subscription__
  *
- * To run a query within a React component, call `useGetMessagesSubSubscription` and pass it any options that fit your needs.
- * When your component renders, `useGetMessagesSubSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetMessagesSub2Subscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetMessagesSub2Subscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetMessagesSubSubscription({
+ * const { data, loading, error } = useGetMessagesSub2Subscription({
  *   variables: {
  *   },
  * });
  */
-export function useGetMessagesSubSubscription(baseOptions?: Apollo.SubscriptionHookOptions<GetMessagesSubSubscription, GetMessagesSubSubscriptionVariables>) {
+export function useGetMessagesSub2Subscription(baseOptions?: Apollo.SubscriptionHookOptions<GetMessagesSub2Subscription, GetMessagesSub2SubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<GetMessagesSubSubscription, GetMessagesSubSubscriptionVariables>(GetMessagesSubDocument, options);
+        return Apollo.useSubscription<GetMessagesSub2Subscription, GetMessagesSub2SubscriptionVariables>(GetMessagesSub2Document, options);
       }
-export type GetMessagesSubSubscriptionHookResult = ReturnType<typeof useGetMessagesSubSubscription>;
-export type GetMessagesSubSubscriptionResult = Apollo.SubscriptionResult<GetMessagesSubSubscription>;
+export type GetMessagesSub2SubscriptionHookResult = ReturnType<typeof useGetMessagesSub2Subscription>;
+export type GetMessagesSub2SubscriptionResult = Apollo.SubscriptionResult<GetMessagesSub2Subscription>;
 export const GetNotesWithUserDocument = gql`
     query GetNotesWithUser {
   notes {

@@ -1,8 +1,8 @@
 {
   "recommendations": [
     "coenraads.bracket-pair-colorizer",
-    "graphql.vscode-graphql",
-    "jpoissonnier.vscode-styled-components",
+    "apollographql.vscode-apollo",
+    "styled-components.vscode-styled-components",
     "exodiusstudios.comment-anchors",
     "paulmolluzzo.convert-css-in-js",
     "dbaeumer.vscode-eslint",

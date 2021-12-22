@@ -12,7 +12,7 @@ interface UtilisateursProps {
   setUserId: (val: number) => void;
 }
 const Utilisateurs = ({ userId, setUserId }: UtilisateursProps) => {
-  const { data } = useGetUsersSubSubscription();
+  const { data, error } = useGetUsersSubSubscription();
   const [addUtilisateur] = useAddUserMutation();
   const [isEditing, setIsEditing] = useState<number | null>(null);
   const [updateUserPseudo] = useUpdateUserPseudoMutation();
@@ -22,7 +22,8 @@ const Utilisateurs = ({ userId, setUserId }: UtilisateursProps) => {
       <S.UtilisateursCtn>
         <S.Titre>Choix de l&apos;utilisateur</S.Titre>
         <S.ListeUtilisateursCtn>
-          {data &&
+          {!error &&
+            data &&
             data.utilisateur.map((user) => (
               <S.UtilisateurCtn
                 key={user.id}

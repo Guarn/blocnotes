@@ -27,7 +27,9 @@ const App = () => {
           <RecoilNexus />
           <GlobalStyles transition={!firstLoad} />
           <Navigation />
-          {location.pathname !== '/' && <LienAccueil theme={theme} />}
+          {location.pathname !== '/' && location.pathname !== '/connexion' && (
+            <LienAccueil theme={theme} />
+          )}
           <SwitchMode onClick={changeMode} theme={theme} />
         </RecoilRoot>
       </ThemeProvider>
