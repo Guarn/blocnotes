@@ -27,6 +27,7 @@ const themeSombre: DefaultTheme = {
     transparent_sombre_01: '',
     transparent_sombre_02: 'rgba(0,0,0,0.2)',
   },
+  name: 'Theme clair',
 };
 
 export default themeSombre;

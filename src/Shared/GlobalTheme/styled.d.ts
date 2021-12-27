@@ -12,5 +12,6 @@ declare module 'styled-components' {
     text: TextColors;
     border: BorderColors;
     shadow: ShadowColors;
+    name: string;
   }
 }

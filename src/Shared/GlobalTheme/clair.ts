@@ -27,6 +27,7 @@ const themeClair: DefaultTheme = {
     transparent_sombre_01: '',
     transparent_sombre_02: 'rgba(0,0,0,0.2)',
   },
+  name: 'Theme sombre',
 } as const;
 
 export default themeClair;

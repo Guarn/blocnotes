@@ -15,17 +15,14 @@ import { onError } from '@apollo/client/link/error';
 import dayjs from 'dayjs';
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import jwt_token from '../../State/Token';
+import { getJWTFromRefreshToken } from '../Auth';
 
 const getRefreshToken = async () => {
   const token = getRecoil(jwt_token);
   let tempToken = '';
   if (!token.token) {
     try {
-      const res = await axios({
-        method: 'post',
-        withCredentials: true,
-        url: 'http://localhost:5000/refreshToken',
-      });
+      const res = await getJWTFromRefreshToken();
       tempToken = res.data.token;
       setRecoil(jwt_token, {
         token: res.data.token,

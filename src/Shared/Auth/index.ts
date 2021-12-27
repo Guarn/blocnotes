@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import jwt_token from '../../State/Token';
 
-const getJWTTokenFromCreds = async ({
+export const getJWTTokenFromCreds = async ({
   login,
   password,
   rememberMe,
