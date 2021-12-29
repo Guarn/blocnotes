@@ -15,9 +15,9 @@ export const IconeGlobal = styled.div<{
   height: ${({ size }) => size};
   width: ${({ size }) => size};
   position: ${({ top, left, right, bottom }) =>
-    top !== undefined ??
-    left !== undefined ??
-    right !== undefined ??
+    top !== undefined ||
+    left !== undefined ||
+    right !== undefined ||
     bottom !== undefined
       ? 'absolute'
       : 'initial'};

@@ -4,11 +4,19 @@ import { Transition } from '../Shared/css/pageStyles';
 import themeClair from '../Shared/GlobalTheme/clair';
 import themeSombre from '../Shared/GlobalTheme/sombre';
 
-const SwitchCtn = styled.div`
+const SwitchCtn = styled.button`
   position: absolute;
   cursor: pointer;
-  bottom: 20px;
+  top: 20px;
   left: 20px;
+  padding: 10px 15px;
+  border: none;
+  background-color: salmon;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  color: white;
+  box-shadow: 0 0 6px salmon;
+  user-select: none;
 `;
 
 const StoriesWrapper = styled.div`
@@ -65,10 +73,8 @@ const TemplateWithTheme: React.FC = ({ children }) => {
       <GlobalStyles transition />
       <StoriesWrapper>
         {children}
-        <SwitchCtn>
-          <button type="button" onClick={changeTheme}>
-            THEME
-          </button>
+        <SwitchCtn type="button" onClick={changeTheme}>
+          THEME
         </SwitchCtn>
       </StoriesWrapper>
     </ThemeProvider>

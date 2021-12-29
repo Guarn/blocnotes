@@ -7,8 +7,8 @@ import { ApolloProvider } from '@apollo/client';
 import useModeSombre from './CustomHooks/useModeSombre';
 import Navigation from './Pages/Navigation/Navigation';
 import GlobalStyles from './Shared/GlobalTheme/GlobalStyles';
-import LienAccueil from './UI/LienAccueil/LienAccueil';
-import SwitchMode from './UI/SwitchMode/SwitchMode';
+import LienAccueil from './UI/BtnRetourAccueil/BtnRetourAccueil';
+import BtnModeSombre from './UI/BtnModeSombre/BtnModeSombre';
 import client from './Shared/Apollo/client';
 
 const App = () => {
@@ -28,9 +28,9 @@ const App = () => {
           <GlobalStyles transition={!firstLoad} />
           <Navigation />
           {location.pathname !== '/' && location.pathname !== '/connexion' && (
-            <LienAccueil theme={theme} />
+            <LienAccueil />
           )}
-          <SwitchMode onClick={changeMode} theme={theme} />
+          <BtnModeSombre onClick={changeMode} />
         </RecoilRoot>
       </ThemeProvider>
     </ApolloProvider>

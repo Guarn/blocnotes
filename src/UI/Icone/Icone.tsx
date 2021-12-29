@@ -15,11 +15,9 @@ const Icone = ({
     right: undefined,
     bottom: undefined,
   },
-  style = {
-    size: 'moyen',
-    couleurPrincipale: '',
-    couleurSecondaire: '',
-  },
+  size = 'moyen',
+  couleurPrincipale = '',
+  couleurSecondaire = '',
 }: IIcone) => {
   // permet d'appeler ce composant en react, car ne prend pas les [] dans les balises
   const IconAsReact = ComposantsIcones[icone];
@@ -27,7 +25,7 @@ const Icone = ({
   return (
     <S.IconeGlobal
       onClick={onClick}
-      size={TailleIcone[style.size || 'moyen']}
+      size={TailleIcone[size]}
       animationDuration={options.animationDuration || 0}
       rotation={options.rotation}
       zoom={options.zoom}
@@ -38,8 +36,8 @@ const Icone = ({
       bottom={options.bottom}
     >
       <IconAsReact
-        couleurPrincipale={style.couleurPrincipale}
-        couleurSecondaire={style.couleurSecondaire}
+        couleurPrincipale={couleurPrincipale}
+        couleurSecondaire={couleurSecondaire}
       />
     </S.IconeGlobal>
   );

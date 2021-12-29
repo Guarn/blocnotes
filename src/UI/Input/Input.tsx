@@ -54,7 +54,7 @@ const Input = ({
         {!isValid ? (
           <Icone
             icone="Exclamation"
-            style={{ couleurPrincipale: 'salmon' }}
+            couleurPrincipale="salmon"
             options={{
               top: 10,
               right: 10,
@@ -63,7 +63,7 @@ const Input = ({
         ) : (
           <Icone
             icone="Check"
-            style={{ couleurPrincipale: 'lightgreen' }}
+            couleurPrincipale="lightgreen"
             options={{
               top: 10,
               right: 10,

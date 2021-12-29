@@ -12,10 +12,7 @@ const BlocLien = ({ couleur = '', icone, lien = '', titre }: BlocLienProps) => (
   <S.BlocLienGlobal to={lien} couleur={couleur} actif={lien.toString()}>
     {titre && <S.LienTitre couleur={couleur}>{titre}</S.LienTitre>}
     {icone && (
-      <Icone
-        icone={icone}
-        style={{ couleurPrincipale: couleur, size: 'extraextralarge' }}
-      />
+      <Icone icone={icone} size="extraextralarge" couleurPrincipale={couleur} />
     )}
   </S.BlocLienGlobal>
 );

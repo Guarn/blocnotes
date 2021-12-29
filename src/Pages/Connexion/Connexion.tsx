@@ -1,9 +1,9 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import EntetePage from '../../UI/EntetePage/EntetePage';
 import Icone from '../../UI/Icone/Icone';
 import * as S from './Connexion.styled';
 import getAuth, { AuthProps } from '../../Shared/Auth';
+import EntetePage from '../../UI/EntetePage/EntetePage';
 
 const Connexion = () => {
   const [firstLoad, setFirstLoad] = useState({
@@ -71,7 +71,8 @@ const Connexion = () => {
           <S.ConnexionAuto>
             <Icone
               icone="Checkbox"
-              style={{ size: 'extralarge', couleurPrincipale: '#B57676' }}
+              size="extralarge"
+              couleurPrincipale="#B57676"
             />
             <S.ConnexionAutoTexte>Se souvenir de moi</S.ConnexionAutoTexte>
           </S.ConnexionAuto>
