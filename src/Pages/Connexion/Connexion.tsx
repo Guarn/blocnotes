@@ -71,7 +71,7 @@ const Connexion = () => {
           <S.ConnexionAuto>
             <Icone
               icone="Checkbox"
-              size="extralarge"
+              taille="extralarge"
               couleurPrincipale="#B57676"
             />
             <S.ConnexionAutoTexte>Se souvenir de moi</S.ConnexionAutoTexte>

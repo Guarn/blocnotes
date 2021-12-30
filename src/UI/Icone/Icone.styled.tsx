@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 
 export const IconeGlobal = styled.div<{
-  size: string;
+  taille: string;
   rotation?: { initial: number; onHover: number };
   zoom?: { initial: number; onHover: number };
   animationDuration: number;
@@ -12,8 +12,8 @@ export const IconeGlobal = styled.div<{
   right?: number;
   bottom?: number;
 }>`
-  height: ${({ size }) => size};
-  width: ${({ size }) => size};
+  height: ${({ taille }) => taille};
+  width: ${({ taille }) => taille};
   position: ${({ top, left, right, bottom }) =>
     top !== undefined ||
     left !== undefined ||

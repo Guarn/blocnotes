@@ -1,125 +1,45 @@
+import { checkGenRules, checkRegexRule } from './genericFunctions';
 import {
   CheckReturnType,
-  CheckStringReturnType,
-  StringValidationIn,
+  StringValidationOptions,
+  ValidationOptions,
 } from './interfaces';
+import * as rules from './rules';
 
-const specialCharReg = /[@#&"()[\]{}`$*€£%+=:/_\-§]/;
-const frenchCharReg = /[àâäéèêëîïôöùûü]/i;
-
-const checkString = ({
-  valeur,
-  options: { min = 0, max = 300, frenchChar = true, specialChar = true },
-}: StringValidationIn): CheckStringReturnType => {
-  const cumulResults = (
-    results: CheckStringReturnType[]
-  ): CheckStringReturnType => {
-    let isValid = true;
-    let errors: string[] = [];
-    results.forEach((result) => {
-      if (!result.isValid) {
-        isValid = false;
-        errors = [...errors, ...result.errors];
-      }
-    });
-    if (!isValid) {
-      return { isValid, errors };
-    }
-    return { isValid };
-  };
-
-  const minResults = checkMin(valeur, min);
-  const maxResults = checkMax(valeur, max);
-  const specialCharResults: CheckStringReturnType = specialChar
-    ? { isValid: true }
-    : checkSpecialChar(valeur);
-  const frenchCharResults: CheckStringReturnType = frenchChar
-    ? { isValid: true }
-    : checkFrenchChar(valeur);
-
-  return cumulResults([
-    minResults,
-    maxResults,
-    frenchCharResults,
-    specialCharResults,
-  ]);
+export const getValidationRules = (
+  validation: ValidationOptions
+): StringValidationOptions => {
+  switch (validation.type) {
+    case 'nombre entier':
+      return rules.nombreEntier;
+    case 'nombre réel':
+      return rules.nombreReel;
+    case 'utilisateur':
+      return rules.utilisateur;
+    case 'mot de passe':
+      return rules.motDePasse;
+    case 'email':
+      return rules.email;
+    default:
+      return rules.chaineSimple;
+  }
 };
 
-const checkMin = (val: string, minValue: number): CheckReturnType => {
-  const isValid = val.length >= minValue;
-  if (!isValid) {
-    return {
-      isValid,
-      errors: [`Doit contenir au moins ${minValue} caractères`],
-    };
-  }
-  return {
-    isValid,
-    errors: [],
-  };
-};
+const checkString = (
+  valeur: string,
+  options: StringValidationOptions
+): CheckReturnType => {
+  let isValid = true;
+  let errors: string[] = [];
 
-const checkMax = (val: string, maxValue: number): CheckReturnType => {
-  const isValid = val.length <= maxValue;
-  if (!isValid) {
-    return {
-      isValid,
-      errors: [`Doit contenir moins de ${maxValue} caractères`],
-    };
-  }
-  return {
-    isValid,
-    errors: [],
-  };
-};
+  const resultsGen = checkGenRules(valeur, options);
+  const resultsReg = checkRegexRule(valeur, options);
 
-const checkSpecialChar = (val: string) => {
-  const isValid = !specialCharReg.test(val);
-
-  if (!isValid) {
-    return {
-      isValid,
-      errors: ['Caractères spéciaux non autorisés'],
-    };
+  if (!resultsGen.isValid || !resultsReg.isValid) {
+    isValid = false;
   }
-  return {
-    isValid,
-    errors: [],
-  };
-};
-
-const checkFrenchChar = (val: string) => {
-  const isValid = !frenchCharReg.test(val);
-  if (!isValid) {
-    return {
-      isValid,
-      errors: ['Accents non autorisés'],
-    };
-  }
-  return {
-    isValid,
-    errors: [],
-  };
+  errors = [...errors, ...resultsGen.errors, ...resultsReg.errors];
+  return { isValid, errors };
 };
 
 export default checkString;
-
-// type Operateur = '*' | '/' | '+' | '-';
-// type Chiffre = string;
-
-// type CharTypeReturn =
-//   | { type: 'operateur'; val: Operateur }
-//   | { type: 'chiffre'; val: Chiffre };
-
-// export const getCharType = (val: string): CharTypeReturn | null => {
-//   const operateurReg = /^[/*\-+]$/;
-//   const chiffreReg = /^[0-9]*$|[0-9]{1,}[,.]{1}[0-9]{1,}$/;
-
-//   if (operateurReg.test(val)) {
-//     return { type: 'operateur', val: val as Operateur };
-//   }
-//   if (chiffreReg.test(val)) {
-//     return { type: 'chiffre', val: val as Chiffre };
-//   }
-//   return null;
-// };

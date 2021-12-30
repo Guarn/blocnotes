@@ -15,7 +15,7 @@ const Icone = ({
     right: undefined,
     bottom: undefined,
   },
-  size = 'moyen',
+  taille = 'moyen',
   couleurPrincipale = '',
   couleurSecondaire = '',
 }: IIcone) => {
@@ -25,7 +25,7 @@ const Icone = ({
   return (
     <S.IconeGlobal
       onClick={onClick}
-      size={TailleIcone[size]}
+      taille={TailleIcone[taille]}
       animationDuration={options.animationDuration || 0}
       rotation={options.rotation}
       zoom={options.zoom}

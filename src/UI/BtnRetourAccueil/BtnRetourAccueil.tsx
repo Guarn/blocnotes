@@ -10,7 +10,7 @@ const LienAccueil = () => {
     <S.LienAccueilGlobal to="/">
       <Icone
         icone="Dashboard"
-        size="extralarge"
+        taille="extralarge"
         couleurPrincipale={theme.text.normal}
         options={{
           zoom: { initial: 1, onHover: 1.2 },

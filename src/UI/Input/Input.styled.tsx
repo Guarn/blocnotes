@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
+import { Transition } from '../../Shared/css/pageStyles';
 
 export const InputGlobal = styled.div`
   width: 100%;
@@ -22,7 +23,7 @@ export const ChampInput = styled.input`
   box-sizing: border-box;
   outline: none;
   padding: 8px 15px;
-  border-radius: 5px;
+  border-radius: 3px;
   border: 1px solid ${({ theme }) => theme.border.pale};
   background-color: ${({ theme }) => theme.body.pale};
   color: ${({ theme }) => theme.text.color1};
@@ -34,7 +35,7 @@ export const ChampInput = styled.input`
     color: ${({ theme }) => theme.text.color1};
     font-weight: 200;
   }
-  transition: color 0.2s, background-color 0.2s, border 0.2s, box-shadow 0.2s;
+  transition: color 0.5s, background-color 0.5s, border 0.5s, box-shadow 0.5s;
   font-size: 1.1rem;
   letter-spacing: normal;
   font-weight: 300;

@@ -12,10 +12,13 @@ export enum TailleIcone {
 }
 
 export interface IIcone {
-  // test
+  /** Taille de l'icône */
+  taille?: keyof typeof TailleIcone;
+  /** Nom de l'icône */
   icone: NomIcones;
-  size?: keyof typeof TailleIcone;
+  /** Couleur principale de l'icône */
   couleurPrincipale?: string;
+  /** Couleur secondaire de l'icône (si configurée) */
   couleurSecondaire?: string;
   onClick?: () => void;
   /** Options d'animation */

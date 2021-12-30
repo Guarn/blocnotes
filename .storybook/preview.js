@@ -6,5 +6,5 @@ import TemplateWithTheme from '../src/StoryBook/TemplateWithTheme';
 addDecorator(story => (<TemplateWithTheme >{story()}</TemplateWithTheme>));
 
 export const parameters = {
-  layout: 'centered',
+  controls: { expanded: true }
 };

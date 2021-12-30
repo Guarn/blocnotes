@@ -11,6 +11,7 @@ const listeIcones = Object.keys(ListeIconeCpt) as NomIcones[];
 const CtnGlobal = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 5% 20%;
 `;
@@ -20,6 +21,8 @@ const CtnIcone = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 20px;
+  height: 80px;
+  width: 100px;
 `;
 
 const Span = styled.span`
@@ -33,7 +36,7 @@ const Span = styled.span`
 const TemplateSimple: ComponentStory<typeof IconeCpt> = ({
   onClick,
   icone,
-  size,
+  taille,
   couleurPrincipale,
   couleurSecondaire,
   options,
@@ -42,7 +45,7 @@ const TemplateSimple: ComponentStory<typeof IconeCpt> = ({
     onClick={onClick}
     icone={icone}
     options={options}
-    size={size}
+    taille={taille}
     couleurPrincipale={couleurPrincipale}
     couleurSecondaire={couleurSecondaire}
   />
@@ -95,7 +98,7 @@ Position.storyName = 'Position absolue';
 const TemplateListe: ComponentStory<typeof IconeCpt> = ({
   onClick,
   options,
-  size,
+  taille,
   couleurPrincipale,
   couleurSecondaire,
 }) => (
@@ -106,7 +109,7 @@ const TemplateListe: ComponentStory<typeof IconeCpt> = ({
           onClick={onClick}
           icone={iconeEx}
           options={options}
-          size={size}
+          taille={taille}
           couleurPrincipale={couleurPrincipale}
           couleurSecondaire={couleurSecondaire}
         />
@@ -117,18 +120,18 @@ const TemplateListe: ComponentStory<typeof IconeCpt> = ({
 );
 
 export const Icone = TemplateListe.bind({});
-Icone.storyName = 'Liste';
+Icone.storyName = 'Liste des icônes';
 
 export default {
-  title: 'UI/Icône',
-  component: Simple,
+  title: 'UI/Icone',
+  component: IconeCpt,
   argTypes: {
     onClick: { action: 'clicked' },
     icone: {
       options: listeIcones,
       control: { type: 'select' },
     },
-    size: { options: Object.keys(TailleIcone), control: { type: 'select' } },
+    taille: { options: Object.keys(TailleIcone), control: { type: 'select' } },
   },
-  args: { size: 'extralarge', couleurPrincipale: 'orange' },
+  args: { taille: 'extralarge', couleurPrincipale: 'orange' },
 } as ComponentMeta<typeof IconeCpt>;

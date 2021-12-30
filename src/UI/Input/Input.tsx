@@ -1,57 +1,88 @@
 import React, { useEffect, useRef, useState } from 'react';
-import checkString from '../../Utils/stringValidation';
-import { StringValidationOptions } from '../../Utils/stringValidation/interfaces';
+import checkString, { getValidationRules } from '../../Utils/stringValidation';
+import {
+  ValidationOptions,
+  ValidationTypes,
+} from '../../Utils/stringValidation/interfaces';
 import Icone from '../Icone/Icone';
 import * as S from './Input.styled';
 import Validation from './Validation';
+import * as rules from '../../Utils/stringValidation/rules';
+
+const getInputTypeFromValidation = (
+  validationOptions: ValidationOptions
+): React.HTMLInputTypeAttribute => {
+  switch (validationOptions.type) {
+    case 'nombre entier':
+      return 'number';
+    case 'nombre réel':
+      return 'number';
+    case 'email':
+      return 'email';
+    case 'mot de passe':
+      return 'password';
+    default:
+      return 'text';
+  }
+};
 
 interface InputProps {
-  valeur: string;
+  valeur?: string;
   setValeur: (val: string) => void;
   placeholder?: string;
-  options: StringValidationOptions;
+  validation?: ValidationOptions;
+  obligatoire?: boolean;
 }
 const Input = ({
   valeur,
   setValeur,
-  placeholder = '',
-  options,
+  placeholder,
+  validation,
+  obligatoire = false,
 }: InputProps) => {
+  const [inputValue, setInputValue] = useState(valeur || '');
   const [isFocus, setIsFocus] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [erreurs, setErreurs] = useState<string[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const validation = (
-    e: React.ChangeEvent<HTMLInputElement> | undefined
+  const handleValidation = (
+    event: React.ChangeEvent<HTMLInputElement> | undefined
   ): void => {
-    if (e) setValeur(e.target.value);
+    if (event) {
+      if (validation) {
+        const rule = getValidationRules(validation);
+        const check = checkString(event.target.value, rule);
+
+        setIsValid(check.isValid);
+        setErreurs(check.errors);
+        setInputValue(event.target.value);
+      } else {
+        setInputValue(event.target.value);
+      }
+    }
   };
 
-  useEffect(() => {
-    const check = checkString({ valeur, options });
-    if (!check.isValid) {
-      setIsValid(false);
-      setErreurs(check.errors);
-    } else {
-      setIsValid(true);
-      setErreurs([]);
-    }
-  }, [valeur]);
+  const handleBlur = () => {
+    setIsFocus(false);
+    setValeur(inputValue);
+  };
 
   return (
     <S.InputGlobal>
       <S.ChampInputCtn>
         <S.ChampInput
+          type={validation ? getInputTypeFromValidation(validation) : 'text'}
           placeholder={placeholder}
-          value={valeur}
-          onChange={validation}
+          value={inputValue}
+          onChange={handleValidation}
           ref={inputRef}
           onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onBlur={handleBlur}
+          name="tagada"
         />
-        {!isValid ? (
+        {isValid ? (
           <Icone
             icone="Exclamation"
             couleurPrincipale="salmon"

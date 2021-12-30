@@ -11,12 +11,19 @@ const BlocNotes = () => {
   return (
     <S.BlocNotesGlobal>
       <EntetePage>BLOC NOTES</EntetePage>
-      <Input
-        valeur={inputValue}
-        setValeur={setInputValue}
-        placeholder="Ajouter une note"
-        options={{ min: 3, specialChar: false, frenchChar: false, max: 6 }}
-      />
+      <form autoComplete="false">
+        <Input
+          valeur={inputValue}
+          setValeur={setInputValue}
+          placeholder="Ajouter une note"
+          validation={{ type: 'utilisateur' }}
+        />
+        <Input
+          valeur={inputValue}
+          setValeur={setInputValue}
+          validation={{ type: 'mot de passe' }}
+        />
+      </form>
     </S.BlocNotesGlobal>
   );
 };

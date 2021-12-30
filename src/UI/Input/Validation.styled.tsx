@@ -11,11 +11,12 @@ export const ValidationGlobal = styled.div`
   color: salmon;
   padding-left: 10px;
   font-size: 1rem;
-  border-radius: 6px;
+  border-radius: 3px;
   position: absolute;
   box-sizing: border-box;
   top: 45px;
   left: 0;
+  z-index: 9999;
 `;
 
 export const ErrorCtn = styled.div`
