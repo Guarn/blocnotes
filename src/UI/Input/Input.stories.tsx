@@ -5,24 +5,44 @@ import InputCpt from './Input';
 const Template: ComponentStory<typeof InputCpt> = ({
   valeur,
   setValeur,
-  placeholder = '',
+  placeholder,
   validation,
 }) => (
   <InputCpt
     valeur={valeur}
-    setValeur={(v) => {
-      valeur = v;
-    }}
+    setValeur={setValeur}
     placeholder={placeholder}
+    validation={validation}
   />
 );
 
-export const Input = Template.bind({});
+export const Simple = Template.bind({});
 
-Input.storyName = 'Simple';
+Simple.storyName = 'Simple';
+Simple.args = {
+  placeholder: 'Un exemple de placeholder',
+};
+
+export const Email = Template.bind({});
+
+Email.storyName = 'Email';
+Email.args = {
+  valeur: 'flo@bidule.com',
+  validation: { type: 'email' },
+};
+
+export const Password = Template.bind({});
+
+Password.storyName = 'Password';
+Password.args = {
+  valeur: '$Abr@C@daBrA!',
+  validation: { type: 'mot de passe' },
+};
 
 export default {
   title: 'UI/Formulaires/Input',
   component: InputCpt,
-  args: { options: { min: 3, max: 6, specialChar: true, frenchChar: true } },
+  argTypes: {
+    setValeur: { action: 'SetValeur' },
+  },
 } as ComponentMeta<typeof InputCpt>;

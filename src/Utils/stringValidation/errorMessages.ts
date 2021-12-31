@@ -13,5 +13,5 @@ export const errorMessages: ErrorMessages = {
   max: 'Moins de # caractères',
   required: 'Ce champ est obligatoire',
   motDePasse:
-    "Caractères alphanumériques sans accents, '@', '#', '&', '$', '%', '-', ou '_' uniquement",
+    "Caractères alphanumériques sans accents, '@', '#', '&', '$', '%', '!', '-', ou '_' uniquement",
 };

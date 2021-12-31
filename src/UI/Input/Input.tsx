@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 import checkString, { getValidationRules } from '../../Utils/stringValidation';
-import {
-  ValidationOptions,
-  ValidationTypes,
-} from '../../Utils/stringValidation/interfaces';
+import { ValidationOptions } from '../../Utils/stringValidation/interfaces';
 import Icone from '../Icone/Icone';
 import * as S from './Input.styled';
 import Validation from './Validation';
-import * as rules from '../../Utils/stringValidation/rules';
 
 const getInputTypeFromValidation = (
   validationOptions: ValidationOptions
@@ -29,6 +26,7 @@ const getInputTypeFromValidation = (
 interface InputProps {
   valeur?: string;
   setValeur: (val: string) => void;
+  label?: string;
   placeholder?: string;
   validation?: ValidationOptions;
   obligatoire?: boolean;
@@ -36,14 +34,17 @@ interface InputProps {
 const Input = ({
   valeur,
   setValeur,
+  label,
   placeholder,
   validation,
   obligatoire = false,
 }: InputProps) => {
+  const [uniqueId] = useState(uuid());
   const [inputValue, setInputValue] = useState(valeur || '');
   const [isFocus, setIsFocus] = useState(false);
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const [erreurs, setErreurs] = useState<string[]>([]);
+  const [isEyeDisabled, setIsEyeDisabled] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -54,14 +55,18 @@ const Input = ({
       if (validation) {
         const rule = getValidationRules(validation);
         const check = checkString(event.target.value, rule);
-
         setIsValid(check.isValid);
         setErreurs(check.errors);
-        setInputValue(event.target.value);
-      } else {
-        setInputValue(event.target.value);
       }
+      setInputValue(event.target.value);
     }
+  };
+
+  const handleMDPVisibilite = () => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.type = isEyeDisabled ? 'password' : 'text';
+    }
+    setIsEyeDisabled((c) => !c);
   };
 
   const handleBlur = () => {
@@ -72,6 +77,14 @@ const Input = ({
   return (
     <S.InputGlobal>
       <S.ChampInputCtn>
+        {label && (
+          <S.Label htmlFor={uniqueId}>
+            {label}
+            {obligatoire && (
+              <span style={{ color: 'orange' }}> (obligatoire)</span>
+            )}
+          </S.Label>
+        )}
         <S.ChampInput
           type={validation ? getInputTypeFromValidation(validation) : 'text'}
           placeholder={placeholder}
@@ -80,28 +93,37 @@ const Input = ({
           ref={inputRef}
           onFocus={() => setIsFocus(true)}
           onBlur={handleBlur}
-          name="tagada"
+          name={uniqueId}
+          id={uniqueId}
         />
-        {isValid ? (
+
+        {inputValue && (
           <Icone
-            icone="Exclamation"
-            couleurPrincipale="salmon"
+            icone={isValid ? 'Check' : 'Exclamation'}
+            couleurPrincipale={isValid ? 'lightgreen' : 'salmon'}
             options={{
-              top: 10,
-              right: 10,
-            }}
-          />
-        ) : (
-          <Icone
-            icone="Check"
-            couleurPrincipale="lightgreen"
-            options={{
-              top: 10,
+              top: label ? 32 : 12,
               right: 10,
             }}
           />
         )}
-        {isFocus && !isValid && <Validation erreurs={erreurs} />}
+        {validation?.type === 'mot de passe' && (
+          <Icone
+            icone={isEyeDisabled ? 'Oeil' : 'OeilDisabled'}
+            onClick={handleMDPVisibilite}
+            taille="grand"
+            couleurPrincipale="lightblue"
+            options={{
+              top: label ? 30 : 12,
+              right: inputValue ? 35 : 10,
+              zoom: { initial: 1, onHover: 1.2 },
+              isAnimated: true,
+              animationDuration: 0.2,
+            }}
+          />
+        )}
+
+        {erreurs.length > 0 && <Validation erreurs={erreurs} />}
       </S.ChampInputCtn>
     </S.InputGlobal>
   );

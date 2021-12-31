@@ -13,11 +13,11 @@ export const checkGenRules = (
 
   if (min && value.length < min) {
     isValid = false;
-    errors.push(errorMessages['min']);
+    errors.push(errorMessages['min'].replace('#', min.toString()));
   }
   if (max && value.length > max) {
     isValid = false;
-    errors.push(errorMessages['max']);
+    errors.push(errorMessages['max'].replace('#', max.toString()));
   }
 
   if (value.length === 0 && required) {
@@ -41,5 +41,6 @@ export const checkRegexRule = (
       errors.push(errorMessages[regName]);
     }
   });
+
   return { isValid, errors };
 };

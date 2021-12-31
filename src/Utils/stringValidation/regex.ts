@@ -8,7 +8,7 @@ export const accents_FR = /[àâäéèêëîïôöùûüç]/i;
 export const texte_FR = /^[\wàâäéèêëîïôöùûüç:'"/*+,()\-.0-9 ]*$/gi;
 
 /** Email */
-export const email = /^[\w-.]+@[\w-]+\.+[\w-]{2,5}$/g;
+export const email = /^[\w\-.]+@[\w-]+\.+[\w-]{2,5}$/;
 
 /** Nombres entiers */
 export const nombreEntier = /^\d+$/;
@@ -19,4 +19,5 @@ export const nombreReel = /^[0-9]+[,.]{1}[0-9]+$/;
 /** Utilisateur (sans espaces) */
 export const utilisateur = /^[\w_-\d]+$/;
 
-export const motDePasse = /^[\w_-\d@&#$%]+$/;
+/** Mot de passe */
+export const motDePasse = /^[\w_-\d@&#$%!]+$/;

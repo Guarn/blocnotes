@@ -14,6 +14,7 @@ export const IconeGlobal = styled.div<{
 }>`
   height: ${({ taille }) => taille};
   width: ${({ taille }) => taille};
+  cursor: ${({ zoom, rotation }) => (zoom || rotation ? 'pointer' : 'initial')};
   position: ${({ top, left, right, bottom }) =>
     top !== undefined ||
     left !== undefined ||

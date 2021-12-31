@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
-import { Transition } from '../../Shared/css/pageStyles';
 
 export const InputGlobal = styled.div`
   width: 100%;
@@ -39,4 +38,9 @@ export const ChampInput = styled.input`
   font-size: 1.1rem;
   letter-spacing: normal;
   font-weight: 300;
+`;
+
+export const Label = styled.label`
+  font-weight: 700;
+  opacity: 0.8;
 `;

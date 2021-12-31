@@ -52,7 +52,7 @@ const TemplateSimple: ComponentStory<typeof IconeCpt> = ({
 );
 
 export const Simple = TemplateSimple.bind({});
-Simple.args = { icone: 'BlocNotes' };
+Simple.args = { icone: 'BlocNotes', options: {} };
 Simple.storyName = 'Simple';
 
 export const Rotation = TemplateSimple.bind({});
