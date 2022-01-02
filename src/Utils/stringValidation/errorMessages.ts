@@ -8,10 +8,10 @@ export const errorMessages: ErrorMessages = {
   specialChar: 'Ne doit pas contenir de caractères spéciaux',
   texte_FR: 'Ne doit pas contenir de caractères spéciaux',
   utilisateur:
-    "Caractères alphanumériques sans accents, '-', ou '_' uniquement",
+    "Caractères alphanumériques sans accents, '-', et '_' uniquement",
   min: 'Minimum # caractères',
   max: 'Moins de # caractères',
   required: 'Ce champ est obligatoire',
   motDePasse:
-    "Caractères alphanumériques sans accents, '@', '#', '&', '$', '%', '!', '-', ou '_' uniquement",
+    "Caractères alphanumériques sans accents, '@', '#', '&', '$', '%', '!', '-', et '_' uniquement",
 };

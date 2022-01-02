@@ -72,6 +72,7 @@ const Chat = ({ userId }: ChatProps) => {
     <S.ChatGlobal>
       <S.MessagesCtn ref={messagesListRef}>
         {data &&
+          data.messages &&
           data.messages.map((message) => (
             <Message
               contenu={message.contenu}

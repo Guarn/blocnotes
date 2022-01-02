@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
+import themeClair from '../../Shared/GlobalTheme/clair';
 
 export const InputGlobal = styled.div`
   width: 100%;
@@ -8,14 +9,37 @@ export const InputGlobal = styled.div`
   align-items: center;
   margin-top: 20px;
 `;
-InputGlobal.displayName = 'InputGlobal';
 
-export const ChampInputCtn = styled.div`
+export const ChampInputCtn = styled.div<{
+  labelOptions?: {
+    placement?: 'top' | 'left';
+    opacity?: number;
+    couleurs?: { themeClair: string; themeSombre: string };
+  };
+}>`
   width: 100%;
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ labelOptions }) =>
+    labelOptions?.placement === 'left' ? 'row' : 'column'};
   position: relative;
+  & > label {
+    padding-bottom: ${({ labelOptions }) =>
+      labelOptions?.placement === 'left' ? '0px' : '5px'};
+    padding-right: ${({ labelOptions }) =>
+      labelOptions?.placement === 'left' ? '5px' : '0px'};
+    color: ${({ theme, labelOptions }) => {
+      if (!labelOptions?.couleurs) {
+        return 'inherit';
+      }
+      return theme === themeClair
+        ? labelOptions.couleurs.themeClair
+        : labelOptions.couleurs.themeSombre;
+    }};
+  }
+  & > label > span {
+    color: orange;
+  }
 `;
 
 export const ChampInput = styled.input`
@@ -42,5 +66,5 @@ export const ChampInput = styled.input`
 
 export const Label = styled.label`
   font-weight: 700;
-  opacity: 0.8;
+  opacity: 0.6;
 `;

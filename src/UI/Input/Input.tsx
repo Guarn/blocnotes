@@ -24,24 +24,36 @@ const getInputTypeFromValidation = (
 };
 
 interface InputProps {
+  /** Valeur du champ */
   valeur?: string;
+  /** Appelé sur Event OnBlur */
   setValeur: (val: string) => void;
+  /** Intitulé du champ */
   label?: string;
+  /** Placement et couleur du label */
+  labelOptions?: {
+    placement?: 'top' | 'left';
+    couleurs?: { themeClair: string; themeSombre: string };
+    opacity?: number;
+  };
+  /** Placeholder */
   placeholder?: string;
+  /** Règles de validation du contenu */
   validation?: ValidationOptions;
+  /** Obligatoire (ajoute un *) */
   obligatoire?: boolean;
 }
 const Input = ({
   valeur,
   setValeur,
   label,
+  labelOptions,
   placeholder,
   validation,
   obligatoire = false,
 }: InputProps) => {
   const [uniqueId] = useState(uuid());
   const [inputValue, setInputValue] = useState(valeur || '');
-  const [isFocus, setIsFocus] = useState(false);
   const [isValid, setIsValid] = useState(true);
   const [erreurs, setErreurs] = useState<string[]>([]);
   const [isEyeDisabled, setIsEyeDisabled] = useState(false);
@@ -70,19 +82,16 @@ const Input = ({
   };
 
   const handleBlur = () => {
-    setIsFocus(false);
     setValeur(inputValue);
   };
 
   return (
     <S.InputGlobal>
-      <S.ChampInputCtn>
+      <S.ChampInputCtn labelOptions={labelOptions}>
         {label && (
           <S.Label htmlFor={uniqueId}>
             {label}
-            {obligatoire && (
-              <span style={{ color: 'orange' }}> (obligatoire)</span>
-            )}
+            {obligatoire && <span> *</span>}
           </S.Label>
         )}
         <S.ChampInput
@@ -91,7 +100,6 @@ const Input = ({
           value={inputValue}
           onChange={handleValidation}
           ref={inputRef}
-          onFocus={() => setIsFocus(true)}
           onBlur={handleBlur}
           name={uniqueId}
           id={uniqueId}
@@ -102,7 +110,7 @@ const Input = ({
             icone={isValid ? 'Check' : 'Exclamation'}
             couleurPrincipale={isValid ? 'lightgreen' : 'salmon'}
             options={{
-              top: label ? 32 : 12,
+              top: label ? 35 : 12,
               right: 10,
             }}
           />
@@ -114,7 +122,7 @@ const Input = ({
             taille="grand"
             couleurPrincipale="lightblue"
             options={{
-              top: label ? 30 : 12,
+              top: label ? 35 : 12,
               right: inputValue ? 35 : 10,
               zoom: { initial: 1, onHover: 1.2 },
               isAnimated: true,

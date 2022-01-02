@@ -5,14 +5,18 @@ import InputCpt from './Input';
 const Template: ComponentStory<typeof InputCpt> = ({
   valeur,
   setValeur,
+  label,
   placeholder,
   validation,
+  obligatoire,
 }) => (
   <InputCpt
     valeur={valeur}
+    label={label}
     setValeur={setValeur}
     placeholder={placeholder}
     validation={validation}
+    obligatoire={obligatoire}
   />
 );
 
@@ -21,6 +25,8 @@ export const Simple = Template.bind({});
 Simple.storyName = 'Simple';
 Simple.args = {
   placeholder: 'Un exemple de placeholder',
+  label: 'Exemple',
+  obligatoire: true,
 };
 
 export const Email = Template.bind({});

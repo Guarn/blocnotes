@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PageDefault, Transition } from '../../Shared/css/pageStyles';
+import { PageDefault } from '../../Shared/css/pageStyles';
 
 export const ConnexionGlobal = styled.div`
   ${PageDefault}
@@ -8,7 +8,6 @@ export const ConnexionGlobal = styled.div`
 `;
 
 export const Encart = styled.div`
-  ${Transition}
   width: 450px;
   height: 500px;
   display: flex;
@@ -19,6 +18,7 @@ export const Encart = styled.div`
   border-radius: 30px;
   box-shadow: 3px 3px 6px ${({ theme }) => theme.border.assombri};
   border: 1px solid ${({ theme }) => theme.border.assombri};
+  transition: border 500ms, background-color 500ms, box-shadow 500ms;
 `;
 
 export const Form = styled.form<{ firstLoad: boolean }>`
@@ -28,7 +28,7 @@ export const Form = styled.form<{ firstLoad: boolean }>`
   width: 90%;
   box-sizing: border-box;
 
-  input:-webkit-autofill {
+  & input:-webkit-autofill {
     box-shadow: 0 0 0px 9999px ${({ theme }) => theme.body.builder_elements}
       inset;
     color: ${({ theme }) => theme.text.color1};
@@ -40,34 +40,6 @@ export const Form = styled.form<{ firstLoad: boolean }>`
     -webkit-text-fill-color: ${({ theme }) => theme.text.color1} !important;
     transition: ${({ firstLoad }) => (firstLoad ? 'none' : 'box-shadow 500ms')};
   }
-`;
-export const Contour = styled.div`
-  width: 100%;
-  border: 1px solid ${({ theme }) => theme.border.assombri};
-  transition: border 500ms;
-`;
-
-export const Label = styled.label`
-  margin-top: 20px;
-  margin-bottom: 3px;
-  font-family: Roboto;
-  font-size: 20px;
-  font-weight: 300;
-  color: ${({ theme }) => theme.text.color1};
-`;
-
-export const Input = styled.input`
-  width: 100%;
-  font-family: Roboto;
-  font-size: 20px;
-  height: 45px;
-  background-color: ${({ theme }) => theme.body.builder_elements};
-  outline: none;
-  border: none;
-  padding-left: 10px;
-  color: ${({ theme }) => theme.text.color1};
-  box-sizing: border-box;
-  transition: background-color 500ms;
 `;
 
 export const ConnexionAuto = styled.div`

@@ -4,6 +4,7 @@ import Icone from '../../UI/Icone/Icone';
 import * as S from './Connexion.styled';
 import getAuth, { AuthProps } from '../../Shared/Auth';
 import EntetePage from '../../UI/EntetePage/EntetePage';
+import Input from '../../UI/Input/Input';
 
 const Connexion = () => {
   const [firstLoad, setFirstLoad] = useState({
@@ -14,7 +15,7 @@ const Connexion = () => {
   const [user, setUser] = useState({
     login: '',
     password: '',
-    rememberMe: false,
+    rememberMe: true,
   });
 
   useEffect(() => {
@@ -33,13 +34,9 @@ const Connexion = () => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    getAuth(user)
-      .then((t) => {
-        console.log(t);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    getAuth(user).catch((err) => {
+      console.log(err);
+    });
   };
   return (
     <S.ConnexionGlobal>
@@ -50,24 +47,21 @@ const Connexion = () => {
           firstLoad={firstLoad.isFirstLoad}
           onSubmit={(e) => onSubmit(e)}
         >
-          <S.Label htmlFor="utilisateur">Nom d&apos;utilisateur</S.Label>
-          <S.Contour>
-            <S.Input
-              type="text"
-              name="utilisateur"
-              id="utilisateur"
-              onChange={(e) => onChange({ login: e.target.value })}
-            />
-          </S.Contour>
-          <S.Label htmlFor="passe">Mot de passe</S.Label>
-          <S.Contour>
-            <S.Input
-              type="password"
-              name="passe"
-              id="passe"
-              onChange={(e) => onChange({ password: e.target.value })}
-            />
-          </S.Contour>
+          <Input
+            valeur={user.login}
+            setValeur={(val) => onChange({ login: val })}
+            label="Nom d'utilisateur"
+            validation={{ type: 'utilisateur' }}
+            obligatoire
+          />
+          <Input
+            valeur={user.password}
+            setValeur={(val) => onChange({ password: val })}
+            label="Mot de passe"
+            validation={{ type: 'mot de passe' }}
+            obligatoire
+          />
+
           <S.ConnexionAuto>
             <Icone
               icone="Checkbox"

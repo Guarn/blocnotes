@@ -13,7 +13,7 @@ const BlocNotes = () => {
   return (
     <S.BlocNotesGlobal>
       <EntetePage>BLOC NOTES</EntetePage>
-      <form autoComplete="false" style={{ width: '50%' }}>
+      <form autoComplete="false" style={{ width: '50%', minWidth: '170px' }}>
         <Input
           valeur={inputValue1}
           setValeur={setInputValue1}

@@ -7,15 +7,15 @@ import themeSombre from '../Shared/GlobalTheme/sombre';
 const SwitchCtn = styled.button`
   position: absolute;
   cursor: pointer;
-  top: 20px;
-  left: 20px;
-  padding: 10px 15px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 5px;
   border: none;
   background-color: salmon;
-  border-radius: 5px;
-  font-size: 1.2rem;
+  border-radius: 2px;
+  font-size: 1rem;
   color: white;
-  box-shadow: 0 0 6px salmon;
   user-select: none;
 `;
 
